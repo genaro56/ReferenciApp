@@ -6,5 +6,13 @@
     <fragment
         android:id="@+id/titleFragment"
         android:name="com.example.referenciapp.TitleFragment"
-        android:label="TitleFragment" />
+        android:label="TitleFragment" >
+        <action
+            android:id="@+id/action_titleFragment_to_referenceMenuFragment"
+            app:destination="@id/referenceMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/referenceMenuFragment"
+        android:name="com.example.referenciapp.ReferenceMenuFragment"
+        android:label="ReferenceMenuFragment" />
 </navigation>
