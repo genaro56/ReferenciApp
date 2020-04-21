@@ -10,9 +10,16 @@
         <action
             android:id="@+id/action_titleFragment_to_referenceMenuFragment"
             app:destination="@id/referenceMenuFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_listMenuFragment"
+            app:destination="@id/listMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/referenceMenuFragment"
         android:name="com.example.referenciapp.ReferenceMenuFragment"
         android:label="ReferenceMenuFragment" />
+    <fragment
+        android:id="@+id/listMenuFragment"
+        android:name="com.example.referenciapp.ListMenuFragment"
+        android:label="ListMenuFragment" />
 </navigation>

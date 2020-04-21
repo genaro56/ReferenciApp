@@ -9,9 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.referenciapp.databinding.FragmentTitleBinding
 
-/**
- * A simple [Fragment] subclass.
- */
 class TitleFragment : Fragment() {
 
     override fun onCreateView(
@@ -34,6 +31,14 @@ class TitleFragment : Fragment() {
             Navigation.
                 createNavigateOnClickListener(
                     R.id.action_titleFragment_to_referenceMenuFragment
+                )
+        )
+
+        // Same, but for the list of references button
+        binding.listMenuButton.setOnClickListener(
+            Navigation.
+                createNavigateOnClickListener(
+                    R.id.action_titleFragment_to_listMenuFragment
                 )
         )
 
