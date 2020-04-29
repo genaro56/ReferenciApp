@@ -5,5 +5,5 @@
     <color name="colorOnPrimary">#fff</color>
     <color name="colorAccent">@android:color/holo_purple</color>
     <color name="colorAccentVariant">#9C27B0</color>
-    <color name="colorOnSurface">#ccc</color>
+    <color name="colorSurface">#ccc</color>
 </resources>

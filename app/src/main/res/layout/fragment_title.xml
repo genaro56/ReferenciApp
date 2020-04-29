@@ -19,7 +19,7 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/index_card" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/referenceMenuButton"
             android:layout_width="210dp"
             android:layout_height="wrap_content"

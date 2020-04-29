@@ -7,7 +7,7 @@
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorSecondary">@color/colorAccent</item>
         <item name="colorSecondaryVariant">@color/colorAccentVariant</item>
-        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorSurface">@color/colorSurface</item>
     </style>
 
 </resources>
