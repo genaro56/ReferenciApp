@@ -3,42 +3,42 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/titleConstraint"
+    <LinearLayout
+        android:id="@+id/titleLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingVertical="40dp">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+
+        <ImageView
+            android:id="@+id/indexCardImage"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MAIN MENU"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.132" />
+            android:layout_weight="1"
+            app:srcCompat="@drawable/index_card" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/referenceMenuButton"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="104dp"
-            android:text="Fichas"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            android:layout_marginBottom="40dp"
+            android:text="@string/fichasButtonText"/>
 
-        <Button
-            android:id="@+id/listMenuButton"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/listImage"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="108dp"
-            android:text="Listado de Fichas"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/referenceMenuButton" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_weight="1"
+            app:srcCompat="@drawable/list"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/listMenuButton"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:text="@string/listadoButtonText"/>
+
+    </LinearLayout>
 </layout>
