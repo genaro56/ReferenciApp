@@ -9,40 +9,36 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:paddingVertical="40dp"
-        android:weightSum="4">
+        android:paddingVertical="40dp">
 
 
         <ImageView
             android:id="@+id/indexCardImage"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:srcCompat="@drawable/index_card" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/referenceMenuButton"
-            android:layout_width="200dp"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:layout_weight="0.5"
-            android:text="Fichas"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:text="@string/fichasButtonText"/>
 
         <ImageView
             android:id="@+id/listImage"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:srcCompat="@drawable/list"/>
 
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/listMenuButton"
-            android:layout_width="200dp"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Listado de Fichas"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:text="@string/listadoButtonText"/>
 
     </LinearLayout>
 </layout>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#333</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorOnPrimary">#fff</color>
+    <color name="colorAccent">@android:color/holo_purple</color>
+    <color name="colorAccentVariant">#9C27B0</color>
+    <color name="colorOnSurface">#ccc</color>
 </resources>
