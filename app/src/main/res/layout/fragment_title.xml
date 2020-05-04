@@ -34,7 +34,7 @@
             app:srcCompat="@drawable/list"/>
 
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/listMenuButton"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
