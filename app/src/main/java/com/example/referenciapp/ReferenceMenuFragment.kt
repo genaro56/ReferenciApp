@@ -22,7 +22,8 @@ class ReferenceMenuFragment : Fragment() {
 
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
-        val supportFragmentManager = requireActivity().supportFragmentManager
+        tabLayout.setupWithViewPager(viewPager)
+        val supportFragmentManager = childFragmentManager
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(PaperTabFragment(), "Papel")
