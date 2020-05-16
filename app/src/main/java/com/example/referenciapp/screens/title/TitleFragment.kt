@@ -1,4 +1,4 @@
-package com.example.referenciapp
+package com.example.referenciapp.screens.title
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import com.example.referenciapp.R
 import com.example.referenciapp.databinding.FragmentTitleBinding
 
 class TitleFragment : Fragment() {

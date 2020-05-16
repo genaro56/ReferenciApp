@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/titleFragment"
-        android:name="com.example.referenciapp.TitleFragment"
+        android:name="com.example.referenciapp.screens.title.TitleFragment"
         android:label="TitleFragment" >
         <action
             android:id="@+id/action_titleFragment_to_referenceMenuFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/referenceMenuFragment"
-        android:name="com.example.referenciapp.ReferenceMenuFragment"
+        android:name="com.example.referenciapp.screens.referenceMenu.ReferenceMenuFragment"
         android:label="ReferenceMenuFragment">
 
         <action
@@ -31,6 +31,6 @@
         android:label="ExerciseFragment" />
     <fragment
         android:id="@+id/listMenuFragment"
-        android:name="com.example.referenciapp.ListMenuFragment"
+        android:name="com.example.referenciapp.screens.listMenu.ListMenuFragment"
         android:label="ListMenuFragment" />
 </navigation>

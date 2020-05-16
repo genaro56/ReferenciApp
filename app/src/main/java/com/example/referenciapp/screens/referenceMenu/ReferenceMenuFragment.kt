@@ -1,4 +1,4 @@
-package com.example.referenciapp
+package com.example.referenciapp.screens.referenceMenu
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.example.referenciapp.DigitalTabFragment
+import com.example.referenciapp.PaperTabFragment
+import com.example.referenciapp.R
+import com.example.referenciapp.ViewPagerAdapter
 import com.example.referenciapp.databinding.FragmentReferenceMenuBinding
 
 class ReferenceMenuFragment : Fragment() {
@@ -25,7 +29,8 @@ class ReferenceMenuFragment : Fragment() {
         tabLayout.setupWithViewPager(viewPager)
         val supportFragmentManager = childFragmentManager
 
-        val adapter = ViewPagerAdapter(supportFragmentManager)
+        val adapter =
+            ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(PaperTabFragment(), "Papel")
         adapter.addFragment(DigitalTabFragment(), "Digital")
 

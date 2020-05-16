@@ -1,4 +1,4 @@
-package com.example.referenciapp
+package com.example.referenciapp.screens.listMenu
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.example.referenciapp.R
 import com.example.referenciapp.databinding.FragmentListMenuBinding
 
 class ListMenuFragment : Fragment() {
