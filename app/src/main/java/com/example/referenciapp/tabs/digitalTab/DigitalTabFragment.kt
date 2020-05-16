@@ -1,4 +1,5 @@
-package com.example.referenciapp
+package com.example.referenciapp.tabs.digitalTab
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -6,19 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
-import com.example.referenciapp.databinding.FragmentPaperTabBinding
-import kotlinx.android.synthetic.main.fragment_paper_tab.*
+import com.example.referenciapp.R
+import com.example.referenciapp.databinding.FragmentDigitalTabBinding
 
-class PaperTabFragment : Fragment() {
-
+class DigitalTabFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val binding: FragmentPaperTabBinding = DataBindingUtil.inflate(
+
+        val binding: FragmentDigitalTabBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_paper_tab,
+            R.layout.fragment_digital_tab,
             container,
             false
         )
@@ -35,5 +35,5 @@ class PaperTabFragment : Fragment() {
 
         return binding.root
     }
-
 }
+

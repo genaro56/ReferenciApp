@@ -1,4 +1,4 @@
-package com.example.referenciapp
+package com.example.referenciapp.tabs
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
