@@ -32,5 +32,5 @@
     <fragment
         android:id="@+id/listMenuFragment"
         android:name="com.example.referenciapp.screens.listMenu.ListMenuFragment"
-        android:label="ListMenuFragment" />
+        android:label="ListMenuFragment" /><action android:id="@+id/action_global_exerciseFragment" app:destination="@id/exerciseFragment"/>
 </navigation>
