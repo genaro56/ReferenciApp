@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
 import com.example.referenciapp.databinding.FragmentPaperTabBinding
+import com.example.referenciapp.recycler.ListSelectionRecyclerViewAdapter
 
 class PaperTabFragment : Fragment() {
 
+    lateinit var exerciseRecycler: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,6 +36,13 @@ class PaperTabFragment : Fragment() {
 //                    R.id.action_referenceMenuFragment_to_exerciseFragment
 //                )
 //        )
+
+        // RecyclerView setup
+        exerciseRecycler = binding.paperRecyclerView
+        exerciseRecycler.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = ListSelectionRecyclerViewAdapter()
+        }
 
         return binding.root
     }
