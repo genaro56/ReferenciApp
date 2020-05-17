@@ -7,12 +7,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/exerciseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="92dp"
-            android:text="Ejercicio 1 Digital"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/digitalTabRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 </layout>
