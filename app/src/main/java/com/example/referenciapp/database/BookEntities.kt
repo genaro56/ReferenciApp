@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Entity
 data class Book(
-   @PrimaryKey(autoGenerate = true) var id: Long,
+   @PrimaryKey(autoGenerate = true) val bookId: Long,
 
    var title: String = "",
    var year: Int = 0,
@@ -16,7 +16,7 @@ data class Book(
 
 @Entity
 data class Author(
-   @PrimaryKey(autoGenerate = true) var id: Long,
+   @PrimaryKey(autoGenerate = true) val authorId: Long,
 
    var firstName: String = "",
    var lastName: String = ""
@@ -24,15 +24,15 @@ data class Author(
 
 @Entity(primaryKeys = ["bookId", "authorId"])
 data class BookAuthor(
-   var bookId: Long,
-   var authorId: Long
+   val bookId: Long,
+   val authorId: Long
 )
 
 data class BookWithAuthors(
    @Embedded val book: Book,
    @Relation(
-      parentColumn = "playlistId",
-      entityColumn = "songId",
+      parentColumn = "bookId",
+      entityColumn = "authorId",
       associateBy = Junction(BookAuthor::class)
    )
    val songs: List<Author>
