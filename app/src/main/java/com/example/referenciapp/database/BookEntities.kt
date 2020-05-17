@@ -30,16 +30,17 @@ data class BookAuthor(
 
 @Entity
 data class BookExercise(
-    @PrimaryKey(autoGenerate = true) val exerciseId: Long,
-    var exerciseTitle: String = "",
-    var completed: Boolean = false
+   @PrimaryKey(autoGenerate = true) val exerciseId: Long,
+   val bookExId: Long,
+   var exerciseTitle: String = "",
+   var completed: Boolean = false
 )
 
 data class BookWithExercises(
    @Embedded val book: Book,
    @Relation(
       parentColumn = "bookId",
-      entityColumn = "exerciseId"
+      entityColumn = "bookExId"
    )
    val exercises: List<BookExercise>
 )
@@ -51,6 +52,6 @@ data class BookWithAuthors(
       entityColumn = "authorId",
       associateBy = Junction(BookAuthor::class)
    )
-   val songs: List<Author>
+   val authors: List<Author>
 )
 
