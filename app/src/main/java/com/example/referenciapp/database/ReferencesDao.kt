@@ -9,4 +9,8 @@ interface ReferencesDao {
     @Transaction
     @Query("SELECT * FROM Book")
     fun getBooksWithAuthor(): List<BookWithAuthors>
+
+    @Transaction
+    @Query("SELECT * FROM Book")
+    fun getBooksWithExercises(): List<BookWithExercises>
 }

@@ -28,6 +28,22 @@ data class BookAuthor(
    val authorId: Long
 )
 
+@Entity
+data class BookExercise(
+    @PrimaryKey(autoGenerate = true) val exerciseId: Long,
+    var exerciseTitle: String = "",
+    var completed: Boolean = false
+)
+
+data class BookWithExercises(
+   @Embedded val book: Book,
+   @Relation(
+      parentColumn = "bookId",
+      entityColumn = "exerciseId"
+   )
+   val exercises: List<BookExercise>
+)
+
 data class BookWithAuthors(
    @Embedded val book: Book,
    @Relation(
