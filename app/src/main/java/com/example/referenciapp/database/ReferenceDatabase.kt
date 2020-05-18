@@ -4,6 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.referenciapp.database.data.AuthorData
+import com.example.referenciapp.database.data.BookAuthorData
+import com.example.referenciapp.database.data.BookData
+import com.example.referenciapp.database.data.BookExerciseData
 
 @Database(
     entities = [Book::class, Author::class, BookAuthor::class, BookExercise::class],
@@ -33,11 +38,29 @@ abstract class ReferenceDatabase : RoomDatabase() {
                         ReferenceDatabase::class.java,
                         "referenciapp_database"
                     )
+                        .addCallback(object: Callback() {
+                            override fun onCreate(db: SupportSQLiteDatabase) {
+                                super.onCreate(db)
+                                val bookData = BookData()
+                                val authorData = AuthorData()
+                                val bookAuthorData = BookAuthorData()
+                                val bookExerciseData = BookExerciseData()
+
+                                ioThread {
+                                    var dao = getInstance(context).referenceDao
+
+                                    dao.insertAuthorData(authorData.populateAuthorData())
+                                    dao.insertBookData(bookData.populateBookData())
+                                    dao.insertBookAuthorData(bookAuthorData.populateBookAuthorData())
+                                    dao.insertBookExerciseData(bookExerciseData.populateBookExerciseData())
+                                }
+                            }
+                        })
                         // Wipes and rebuilds instead of migrating if no Migration object.
                         // Migration is not part of this lesson. You can learn more about
                         // migration with Room in this blog post:
                         // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
-                        .fallbackToDestructiveMigration()
+//                        .fallbackToDestructiveMigration()
                         .build()
                     // Assign INSTANCE to the newly created database.
                     INSTANCE = instance
