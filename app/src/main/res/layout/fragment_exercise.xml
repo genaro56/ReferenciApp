@@ -72,7 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_weight="1"
-                        android:text="Titulo"
+                        android:text="Apellidos"
                         android:textAlignment="center" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -101,7 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_weight="1"
-                        android:text="Titulo"
+                        android:text="Año"
                         android:textAlignment="center" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -160,7 +160,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_weight="1"
-                        android:text="Titulo"
+                        android:text="Lugar"
                         android:textAlignment="center" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton

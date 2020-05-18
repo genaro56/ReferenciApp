@@ -6,4 +6,5 @@
     <string name="fichasButtonText">Fichas</string>
     <string name="listadoButtonText">Listado de Fichas</string>
     <string name="tipo_de_referencia">Tipo de referencia:</string>
+    <string name="ejercicio_no">Ejercicio no.</string>
 </resources>
