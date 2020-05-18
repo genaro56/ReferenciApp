@@ -1,5 +1,8 @@
 package com.example.referenciapp.recycler
 
+import android.content.Intent
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,10 +15,10 @@ class ListSelectionViewHolder(itemView: View) :
     val exerciseTitle = itemView.exerciseTitle as TextView
     val completionBar = itemView.completionBar as ImageView
 
-//    init {
-//        itemView.setOnClickListener {
-//            val browserIntent: Intent = Intent(ACTION_VIEW, Uri.parse(imageUrl))
-//            itemView.context.startActivity(browserIntent)
-//        }
-//    }
+    init {
+        itemView.setOnClickListener {
+            val browserIntent: Intent = Intent(ACTION_VIEW, Uri.parse(imageUrl))
+            itemView.context.startActivity(browserIntent)
+        }
+    }
 }
