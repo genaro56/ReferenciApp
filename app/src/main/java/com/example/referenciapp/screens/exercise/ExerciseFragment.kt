@@ -13,6 +13,8 @@ import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -20,6 +22,7 @@ import com.example.referenciapp.R
 import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_exercise.*
+import kotlinx.android.synthetic.main.fragment_exercise.view.*
 import kotlin.math.roundToInt
 
 
@@ -162,17 +165,34 @@ class ExerciseFragment : Fragment() {
             container,
             false
         )
+        // Inflate the layout for this fragment
+        val v = inflater.inflate(R.layout.fragment_exercise, container, false)
+        val context = activity as AppCompatActivity
+
+        val tv = v.findViewById<TextView>(R.id.reference_title)
+        tv.text = arguments?.getString("title")
+        val area1 = v.area1
+        val area2 = v.area2
+        val area3 = v.area3
+        val area4 = v.area4
+        val red = v.fabRed
+        val blue = v.fabBlue
+//        val green = v.fabGreen
+        val purple = v.fabPurple
+        val yellow = v.fabYellow
 
         area1.setOnDragListener(onDragListener)
         area2.setOnDragListener(onDragListener)
+        area3.setOnDragListener(onDragListener)
+        area4.setOnDragListener(onDragListener)
 
-        fabRed.setOnLongClickListener(onLongClickListener)
-        fabBlue.setOnLongClickListener(onLongClickListener)
-        fabGreen.setOnLongClickListener(onLongClickListener)
-        fabPurple.setOnLongClickListener(onLongClickListener)
-        fabYellow.setOnLongClickListener(onLongClickListener)
+        red.setOnLongClickListener(onLongClickListener)
+        blue.setOnLongClickListener(onLongClickListener)
+//        green.setOnLongClickListener(onLongClickListener)
+        purple.setOnLongClickListener(onLongClickListener)
+        yellow.setOnLongClickListener(onLongClickListener)
 
-        return binding.root
+        return v
     }
 
     private fun pxToDp(px: Float): Float {
