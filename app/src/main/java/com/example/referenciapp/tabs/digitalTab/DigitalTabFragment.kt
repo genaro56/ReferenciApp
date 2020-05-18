@@ -28,17 +28,6 @@ class DigitalTabFragment : Fragment() {
             false
         )
 
-        // Navigation to Exercise Fragment
-        // This is only for testing/MVP purposes. Eventually we'll add
-        // more exercise entries
-//        binding.exerciseButton.setOnClickListener(
-//            Navigation.
-//                createNavigateOnClickListener(
-//                    R.id.action_referenceMenuFragment_to_exerciseFragment
-//                )
-//        )
-
-
         exerciseRecycler = binding.digitalTabRecycler
         exerciseRecycler.apply {
             layoutManager = LinearLayoutManager(context)
