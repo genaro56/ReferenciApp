@@ -2,11 +2,12 @@ package com.example.referenciapp.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
 
 class ListSelectionRecyclerViewAdapter():
-    RecyclerView.Adapter<ListSelectionViewHolder>(){
+    RecyclerView.Adapter<ListSelectionViewHolder>() {
 
     var listExercises = arrayOf("Exercise 1", "Exercise 2", "Exercise 3")
 
