@@ -19,9 +19,8 @@ import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.referenciapp.R
-import com.example.referenciapp.databinding.FragmentExerciseBinding
+import com.example.referenciapp.databinding.FragmentExerciseBindingImpl
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.fragment_exercise.*
 import kotlinx.android.synthetic.main.fragment_exercise.view.*
 import kotlin.math.roundToInt
 
@@ -34,8 +33,10 @@ class ExerciseFragment : Fragment() {
     companion object {
         // Default card elevation.
         const val CARD_ELEVATION_DEFAULT_DP: Float = 2f
+
         // Card elevation once the dragging has started.
         const val CARD_ELEVATION_DRAG_START_DP: Float = 8f
+
         // Card elevation once the color is dragged over one of the areas.
         const val CARD_ELEVATION_DRAG_ENTER_DP: Float = 16f
     }
@@ -54,7 +55,8 @@ class ExerciseFragment : Fragment() {
             val dragData = ClipData(
                 it.tag as? CharSequence,
                 arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
-                item)
+                item
+            )
 
             // Instantiates the drag shadow builder, which is the class we will use
             // to draw a shadow of the dragged object. The implementation details
@@ -159,7 +161,7 @@ class ExerciseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding : FragmentExerciseBinding = DataBindingUtil.inflate(
+        val binding: FragmentExerciseBindingImpl = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_exercise,
             container,
