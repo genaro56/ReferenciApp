@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a1236edb56fb013466eacd007b6676a4",
+    "identityHash": "7c22878a6fd17c922b0fc495c80e5545",
     "entities": [
       {
         "tableName": "Book",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`bookId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `year` INTEGER NOT NULL, `month` TEXT NOT NULL, `day` TEXT NOT NULL, `publisher` TEXT NOT NULL, `pages` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`bookId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `year` INTEGER NOT NULL, `month` TEXT NOT NULL, `day` TEXT NOT NULL, `publisher` TEXT NOT NULL, `city` TEXT NOT NULL, `pages` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "bookId",
@@ -41,6 +41,12 @@
           {
             "fieldPath": "publisher",
             "columnName": "publisher",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "city",
+            "columnName": "city",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -161,7 +167,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a1236edb56fb013466eacd007b6676a4')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7c22878a6fd17c922b0fc495c80e5545')"
     ]
   }
 }

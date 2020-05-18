@@ -4,19 +4,20 @@ import androidx.room.*
 
 @Entity
 data class Book(
-   @PrimaryKey(autoGenerate = true) val bookId: Long,
+   @PrimaryKey(autoGenerate = true) val bookId: Long = 0L,
 
    var title: String = "",
    var year: Int = 0,
    var month: String = "",
    var day: String = "",
    var publisher: String = "",
+   var city: String = "",
    var pages: String = ""
 )
 
 @Entity
 data class Author(
-   @PrimaryKey(autoGenerate = true) val authorId: Long,
+   @PrimaryKey(autoGenerate = true) val authorId: Long = 0L,
 
    var firstName: String = "",
    var lastName: String = ""
@@ -30,7 +31,7 @@ data class BookAuthor(
 
 @Entity
 data class BookExercise(
-   @PrimaryKey(autoGenerate = true) val exerciseId: Long,
+   @PrimaryKey(autoGenerate = true) val exerciseId: Long = 0L,
    val bookExId: Long,
    var exerciseTitle: String = "",
    var completed: Boolean = false
