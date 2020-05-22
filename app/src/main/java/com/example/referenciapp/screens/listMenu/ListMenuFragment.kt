@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
 import com.example.referenciapp.databinding.FragmentListMenuBinding
-import com.example.referenciapp.recycler.ListSelectionRecyclerViewAdapter
 
 class ListMenuFragment : Fragment() {
 
@@ -26,11 +24,11 @@ class ListMenuFragment : Fragment() {
             false
         )
 
-        listExercisesRecycler = binding.listExercisesRecycler
-        listExercisesRecycler.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ListSelectionRecyclerViewAdapter()
-        }
+//        listExercisesRecycler = binding.listExercisesRecycler
+//        listExercisesRecycler.apply {
+//            layoutManager = LinearLayoutManager(context)
+//            adapter = ListSelectionRecyclerViewAdapter()
+//        }
 
         return binding.root
     }

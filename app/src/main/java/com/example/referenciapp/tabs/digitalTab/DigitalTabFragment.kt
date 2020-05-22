@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
 import com.example.referenciapp.databinding.FragmentDigitalTabBinding
-import com.example.referenciapp.recycler.ListSelectionRecyclerViewAdapter
 
 class DigitalTabFragment : Fragment() {
 
@@ -28,12 +25,12 @@ class DigitalTabFragment : Fragment() {
             false
         )
 
-        exerciseRecycler = binding.digitalTabRecycler
-        exerciseRecycler.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ListSelectionRecyclerViewAdapter()
-        }
-
+//        exerciseRecycler = binding.digitalTabRecycler
+//        exerciseRecycler.apply {
+//            layoutManager = LinearLayoutManager(context)
+//            adapter = ListSelectionRecyclerViewAdapter()
+//        }
+//
         return binding.root
     }
 }

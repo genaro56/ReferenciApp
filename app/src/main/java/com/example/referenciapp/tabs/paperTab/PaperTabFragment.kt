@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
 import com.example.referenciapp.databinding.FragmentPaperTabBinding
-import com.example.referenciapp.recycler.ListSelectionRecyclerViewAdapter
 
 class PaperTabFragment : Fragment() {
 
@@ -26,12 +24,12 @@ class PaperTabFragment : Fragment() {
             false
         )
 
-        // RecyclerView setup
-        exerciseRecycler = binding.paperRecyclerView
-        exerciseRecycler.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ListSelectionRecyclerViewAdapter()
-        }
+//        // RecyclerView setup
+//        exerciseRecycler = binding.paperRecyclerView
+//        exerciseRecycler.apply {
+//            layoutManager = LinearLayoutManager(context)
+//            adapter = ListSelectionRecyclerViewAdapter()
+//        }
 
         return binding.root
     }
