@@ -1,5 +1,6 @@
 package com.example.referenciapp.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -9,17 +10,17 @@ import androidx.room.Update
 interface ReferenceDao {
     // Getting all exercises
     @Query("SELECT * FROM PrintExercises")
-    fun getPrintExercises(): List<PrintExercises>
+    fun getPrintExercises(): LiveData<List<PrintExercises>>
 
     @Query("SELECT * FROM DigitalExercises")
-    fun getDigitalExercises(): List<DigitalExercises>
+    fun getDigitalExercises(): LiveData<List<DigitalExercises>>
 
     // Getting a specific exercise
     @Query("SELECT * FROM PrintExercises WHERE id = :printId")
-    fun getPrintExercise(printId: PrintExercises)
+    fun getPrintExercise(printId: Long): LiveData<PrintExercises>
 
     @Query("SELECT * FROM DigitalExercises WHERE id = :digitalId")
-    fun getDigitalExercise(digitalId: DigitalExercises)
+    fun getDigitalExercise(digitalId: Long): LiveData<DigitalExercises>
 
     // Loading data
     @Insert
