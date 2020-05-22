@@ -31,8 +31,8 @@ class ReferenceMenuFragment : Fragment() {
 
         val adapter =
             ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(PaperTabFragment(), "Papel")
-        adapter.addFragment(DigitalTabFragment(), "Digital")
+        adapter.addFragment(PaperTabFragment(), "Impresas")
+        adapter.addFragment(DigitalTabFragment(), "Digitales")
 
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
