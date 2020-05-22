@@ -24,10 +24,10 @@ interface ReferenceDao {
 
     // Loading data
     @Insert
-    suspend fun insertPrint(ex: PrintExercises)
+    suspend fun insertPrintAll(vararg ex: PrintExercises)
 
     @Insert
-    suspend fun insertDigital(ex: DigitalExercises)
+    suspend fun insertDigitalAll(vararg ex: DigitalExercises)
 
     // Updating data (e.g. when an exercise is complete
     @Update

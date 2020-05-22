@@ -18,7 +18,7 @@ class ReferenceMenuViewModel(application: Application): AndroidViewModel(applica
     val allDigitalExercises: LiveData<List<DigitalExercises>>
 
     init {
-        val referenceDao = ReferenceDatabase.getDatabase(application).referenceDao()
+        val referenceDao = ReferenceDatabase.getDatabase(application, viewModelScope).referenceDao()
         repository = ReferenceRepository(referenceDao)
         allPrintExercises = repository.allPrintExercises
         allDigitalExercises = repository.allDigitalExercises
