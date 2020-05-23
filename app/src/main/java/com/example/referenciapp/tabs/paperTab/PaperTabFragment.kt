@@ -16,7 +16,6 @@ import com.example.referenciapp.recycler.PrintExerciseListAdapter
 
 class PaperTabFragment : Fragment() {
 
-    lateinit var exerciseRecycler: RecyclerView
     private lateinit var referenceViewModel: ReferenceMenuViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

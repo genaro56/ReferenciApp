@@ -66,7 +66,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-
+    // UI
+    implementation 'androidx.ui:ui-framework:0.1.0-dev10'
+    implementation 'androidx.ui:ui-layout:0.1.0-dev10'
+    implementation 'androidx.ui:ui-material:0.1.0-dev10'
+    implementation 'androidx.ui:ui-tooling:0.1.0-dev10'
     // Annotation processor
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 

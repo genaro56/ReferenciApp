@@ -17,7 +17,6 @@ import com.example.referenciapp.recycler.DigitalExerciseListAdapter
 
 class DigitalTabFragment : Fragment() {
 
-    lateinit var exerciseRecycler: RecyclerView
     private lateinit var referenceViewModel: ReferenceMenuViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
