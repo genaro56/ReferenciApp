@@ -10,16 +10,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
+import com.example.referenciapp.ReferenceMenuViewModel
 import kotlinx.android.synthetic.main.list_selection_view_holder.view.*
 
-class DigitalExerciseListAdapter internal constructor(
-    context: Context
+class DigitalExerciseListAdapter(
+    context: Context,
+    viewModel: ReferenceMenuViewModel
 ) : RecyclerView.Adapter<DigitalExerciseListAdapter.ExerciseViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var exercises = emptyList<DigitalExercises>() // cached copy of print exercises
+    val vm = viewModel
 
     inner class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val exerciseLabel = itemView.exerciseLabel as TextView
@@ -48,17 +52,10 @@ class DigitalExerciseListAdapter internal constructor(
         if(current.completed)
             holder.completionBar.setBackgroundColor(Color.GREEN)
 
-        val bundle = bundleOf(
-            "EX_TYPE" to current.exerciseType,
-            "EX_ID" to current.id
-        )
-
-        holder.itemView.setOnClickListener(
-            Navigation.createNavigateOnClickListener(
-                R.id.action_global_exerciseFragment,
-                bundle
-            )
-        )
+        holder.itemView.setOnClickListener{view ->
+            vm.setSelectedId(current.id)
+            view.findNavController().navigate(R.id.action_global_exerciseFragment)
+        }
     }
 
     internal fun setExercises(exercises: List<DigitalExercises>) {
