@@ -39,5 +39,10 @@ class DigitalExerciseListAdapter internal constructor(
             holder.completionBar.setBackgroundColor(Color.GREEN)
     }
 
+    internal fun setExercises(exercises: List<DigitalExercises>) {
+        this.exercises = exercises
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = exercises.size
 }

@@ -39,5 +39,10 @@ class PrintExerciseListAdapter internal constructor(
             holder.completionBar.setBackgroundColor(Color.GREEN)
     }
 
+    internal fun setExercises(exercises: List<PrintExercises>) {
+        this.exercises = exercises
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = exercises.size
 }
