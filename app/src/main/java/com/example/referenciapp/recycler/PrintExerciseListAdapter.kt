@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
 import com.example.referenciapp.database.PrintExercises
@@ -23,6 +24,14 @@ class PrintExerciseListAdapter internal constructor(
         val exerciseLabel = itemView.exerciseLabel as TextView
         val exerciseTitle = itemView.exerciseTitle as TextView
         val completionBar = itemView.completionBar as ImageView
+
+        init {
+            itemView.setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                    R.id.action_global_exerciseFragment
+                )
+            )
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
@@ -32,7 +41,7 @@ class PrintExerciseListAdapter internal constructor(
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
         val current = exercises[position]
-        holder.exerciseLabel.text = "Ejercicio ${position}:"
+        holder.exerciseLabel.text = "Ejercicio ${position + 1}"
         holder.exerciseTitle.text = current.description
 
         if(current.completed)
