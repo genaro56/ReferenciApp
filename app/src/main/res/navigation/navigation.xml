@@ -19,12 +19,7 @@
     <fragment
         android:id="@+id/referenceMenuFragment"
         android:name="com.example.referenciapp.screens.referenceMenu.ReferenceMenuFragment"
-        android:label="ReferenceMenuFragment">
-
-        <action
-            android:id="@+id/action_referenceMenuFragment_to_exerciseFragment"
-            app:destination="@id/exerciseFragment" />
-    </fragment>
+        android:label="ReferenceMenuFragment"/>
     <fragment
         android:id="@+id/exerciseFragment"
         android:name="com.example.referenciapp.screens.exercise.ExerciseFragment"
@@ -33,4 +28,5 @@
         android:id="@+id/listMenuFragment"
         android:name="com.example.referenciapp.screens.listMenu.ListMenuFragment"
         android:label="ListMenuFragment" />
+    <action android:id="@+id/action_global_exerciseFragment" app:destination="@id/exerciseFragment" />
 </navigation>

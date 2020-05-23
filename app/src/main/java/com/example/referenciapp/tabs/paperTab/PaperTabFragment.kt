@@ -5,16 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
+import com.example.referenciapp.ReferenceMenuViewModel
 import com.example.referenciapp.databinding.FragmentPaperTabBinding
-import com.example.referenciapp.recycler.ListSelectionRecyclerViewAdapter
+import com.example.referenciapp.recycler.PrintExerciseListAdapter
 
 class PaperTabFragment : Fragment() {
 
     lateinit var exerciseRecycler: RecyclerView
+    private lateinit var referenceViewModel: ReferenceMenuViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,22 +30,15 @@ class PaperTabFragment : Fragment() {
             false
         )
 
-        // Navigation to Exercise Fragment
-        // This is only for testing/MVP purposes. Eventually we'll add
-        // more exercise entries
-//        binding.exerciseButton.setOnClickListener(
-//            Navigation.
-//                createNavigateOnClickListener(
-//                    R.id.action_referenceMenuFragment_to_exerciseFragment
-//                )
-//        )
+        val recyclerView = binding.paperRecyclerView
+        val adapter = PrintExerciseListAdapter(requireNotNull(context))
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireNotNull(context))
 
-        // RecyclerView setup
-        exerciseRecycler = binding.paperRecyclerView
-        exerciseRecycler.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ListSelectionRecyclerViewAdapter()
-        }
+        referenceViewModel = ViewModelProvider(this).get(ReferenceMenuViewModel::class.java)
+        referenceViewModel.allPrintExercises.observe(viewLifecycleOwner, Observer { exercises ->
+            exercises?.let { adapter.setExercises(it)}
+        })
 
         return binding.root
     }
