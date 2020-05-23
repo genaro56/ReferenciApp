@@ -14,12 +14,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.referenciapp.R
-import com.example.referenciapp.databinding.FragmentExerciseBindingImpl
+import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_exercise.view.*
 import kotlin.math.roundToInt
@@ -161,12 +162,22 @@ class ExerciseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentExerciseBindingImpl = DataBindingUtil.inflate(
+        val binding: FragmentExerciseBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_exercise,
             container,
             false
         )
+
+        val type = requireArguments().getInt("EX_TYPE")
+        val id = requireArguments().getLong("EX_ID")
+
+        Toast.makeText(
+            context,
+            "Type: ${type} and id: ${id}",
+            Toast.LENGTH_SHORT
+        ).show()
+
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_exercise, container, false)
         val context = activity as AppCompatActivity

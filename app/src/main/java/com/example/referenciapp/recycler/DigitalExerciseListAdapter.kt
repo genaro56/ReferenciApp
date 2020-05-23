@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
@@ -46,6 +47,18 @@ class DigitalExerciseListAdapter internal constructor(
 
         if(current.completed)
             holder.completionBar.setBackgroundColor(Color.GREEN)
+
+        val bundle = bundleOf(
+            "EX_TYPE" to current.exerciseType,
+            "EX_ID" to current.id
+        )
+
+        holder.itemView.setOnClickListener(
+            Navigation.createNavigateOnClickListener(
+                R.id.action_global_exerciseFragment,
+                bundle
+            )
+        )
     }
 
     internal fun setExercises(exercises: List<DigitalExercises>) {
