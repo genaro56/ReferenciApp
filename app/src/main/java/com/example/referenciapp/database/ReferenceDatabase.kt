@@ -4,79 +4,109 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import java.lang.ref.Reference
 
-@Database(
-    entities = [Book::class, Author::class, BookAuthor::class],
-    version = 1,
-    exportSchema = false)
-abstract class ReferenceDatabase : RoomDatabase() {
+@Database(entities = [PrintExercises::class, DigitalExercises::class], version = 1, exportSchema = false)
+public abstract class ReferenceDatabase : RoomDatabase() {
 
-    /**
-     * Connects the database to the DAO.
-     */
-    abstract val sleepDatabaseDao: ReferencesDao
+    abstract fun referenceDao(): ReferenceDao
 
-    /**
-     * Define a companion object, this allows us to add functions on the SleepDatabase class.
-     *
-     * For example, clients can call `SleepDatabase.getInstance(context)` to instantiate
-     * a new SleepDatabase.
-     */
+    private class ReferenceDatabaseCallback(
+        private val scope: CoroutineScope
+    ) : RoomDatabase.Callback() {
+
+        override fun onCreate(db: SupportSQLiteDatabase) {
+            super.onCreate(db)
+
+            INSTANCE?.let {database ->
+                scope.launch {
+                    var referenceDao = database.referenceDao()
+
+                    // Print Exercises
+                    referenceDao.insertPrintAll(
+                        PrintExercises(
+                            id = 0,
+                            authors = "Wilber, K.",
+                            isEditor = true,
+                            year = "(1997)",
+                            title = "El paradigma holográfico",
+                            city = "Barcelona",
+                            country = "España",
+                            publisher = "Kairós",
+                            resourceType = 1,
+                            exerciseType = 1,
+                            description = "Libro con editor"
+                        ),
+                        PrintExercises(
+                            id = 1,
+                            authors = "Pérez, M., Cáceres, I., López, J. L., Álvarez, A., Casado, C., López Martínez, C., ... Morrison, W.",
+                            year = "(2016)",
+                            title = "Manual de psicoterapia",
+                            city = "Buenos Aires",
+                            country = "Argentina",
+                            publisher = "Panamericana",
+                            resourceType = 1,
+                            exerciseType = 2,
+                            description = "Libro con más de cuatro autores"
+                        )
+                    )
+
+                    // Digital Exercises
+                    referenceDao.insertDigitalAll(
+                        DigitalExercises(
+                            id = 0,
+                            authors = "Merkh, D. y Merkh, C. S.",
+                            year = "(2015)",
+                            title = "101 ideas creativas para familias",
+                            url = "Recuperado de http://0-site.ebrary.com.jabega.uma.es/lib/bibliotecauma/detail.action?docID=11362387",
+                            resourceType = 1,
+                            exerciseType = 1,
+                            description = "Libro digital simple"
+                        ),
+                        DigitalExercises(
+                            id = 1,
+                            term = "Marqués",
+                            year = "(s.f.)",
+                            institution = "En el Diccionario de la Real Academia Española",
+                            edition = "(23ra ed.)",
+                            source = "Recuperado de http://dle.rae.es/?id=OT28kUW",
+                            resourceType = 2,
+                            exerciseType = 2,
+                            description = "Diccionario digital"
+                        )
+                    )
+                }
+            }
+        }
+    }
+
     companion object {
-        /**
-         * INSTANCE will keep a reference to any database returned via getInstance.
-         *
-         * This will help us avoid repeatedly initializing the database, which is expensive.
-         *
-         *  The value of a volatile variable will never be cached, and all writes and
-         *  reads will be done to and from the main memory. It means that changes made by one
-         *  thread to shared data are visible to other threads.
-         */
+        // Singleton prevents multiple instances of database opening at the
+        // same time.
         @Volatile
         private var INSTANCE: ReferenceDatabase? = null
 
-        /**
-         * Helper function to get the database.
-         *
-         * If a database has already been retrieved, the previous database will be returned.
-         * Otherwise, create a new database.
-         *
-         * This function is threadsafe, and callers should cache the result for multiple database
-         * calls to avoid overhead.
-         *
-         * This is an example of a simple Singleton pattern that takes another Singleton as an
-         * argument in Kotlin.
-         *
-         * To learn more about Singleton read the wikipedia article:
-         * https://en.wikipedia.org/wiki/Singleton_pattern
-         *
-         * @param context The application context Singleton, used to get access to the filesystem.
-         */
-        fun getInstance(context: Context): ReferenceDatabase {
-            // Multiple threads can ask for the database at the same time, ensure we only initialize
-            // it once by using synchronized. Only one thread may enter a synchronized block at a
-            // time.
+        fun getDatabase(
+            context: Context,
+            scope: CoroutineScope
+        ): ReferenceDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
             synchronized(this) {
-                // Copy the current value of INSTANCE to a local variable so Kotlin can smart cast.
-                // Smart cast is only available to local variables.
-                var instance = INSTANCE
-                // If instance is `null` make a new database instance.
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        ReferenceDatabase::class.java,
-                        "sleep_history_database"
-                    )
-                        // Wipes and rebuilds instead of migrating if no Migration object.
-                        // Migration is not part of this lesson. You can learn more about
-                        // migration with Room in this blog post:
-                        // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
-                        .fallbackToDestructiveMigration()
-                        .build()
-                    // Assign INSTANCE to the newly created database.
-                    INSTANCE = instance
-                }
-                // Return instance; smart cast to be non-null.
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    ReferenceDatabase::class.java,
+                    "reference_database"
+                )
+                    .addCallback(ReferenceDatabaseCallback(scope))
+                    .fallbackToDestructiveMigration()
+                    .build()
+                INSTANCE = instance
                 return instance
             }
         }
