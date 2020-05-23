@@ -19,7 +19,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.referenciapp.R
+import com.example.referenciapp.ReferenceMenuViewModel
 import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_exercise.view.*
@@ -31,6 +34,8 @@ import kotlin.math.roundToInt
  */
 @Suppress("DEPRECATION")
 class ExerciseFragment : Fragment() {
+
+    lateinit var viewModel: ReferenceMenuViewModel
     companion object {
         // Default card elevation.
         const val CARD_ELEVATION_DEFAULT_DP: Float = 2f
@@ -169,14 +174,16 @@ class ExerciseFragment : Fragment() {
             false
         )
 
-        val type = requireArguments().getInt("EX_TYPE")
-        val id = requireArguments().getLong("EX_ID")
+        // Set the View Model to observe the selected exercise.
+        viewModel = ViewModelProvider(requireNotNull(activity)).get(ReferenceMenuViewModel::class.java)
 
-        Toast.makeText(
-            context,
-            "Type: ${type} and id: ${id}",
-            Toast.LENGTH_SHORT
-        ).show()
+        viewModel.selectedId.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(
+                context,
+                "$it",
+                Toast.LENGTH_SHORT
+            ).show()
+        })
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_exercise, container, false)
