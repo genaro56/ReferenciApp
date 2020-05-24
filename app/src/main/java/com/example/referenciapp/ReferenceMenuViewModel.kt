@@ -21,9 +21,25 @@ class ReferenceMenuViewModel(application: Application): AndroidViewModel(applica
     // Instead of passing around data in bundles, we'll update the selected index with
     // LiveData. Since the id's match the exercises' place in the List, we can access any
     // exercises with an index, rather than relying on queries to the db.
-    private val _selectedId = MutableLiveData<Long>()
-    val selectedId: LiveData<Long>
+    // Likewise, we can specify if the clicked item is a print or digital exercise, and so on.
+    // The advantage is that ViewModels are lifecycle aware, and we don't have to worry about
+    // configuration changes.
+    private val _selectedId = MutableLiveData<Int>()
+    val selectedId: LiveData<Int>
         get() = _selectedId
+
+    // 0: print, 1: digital
+    private val _resourceType = MutableLiveData<Int>()
+    val resourceType: LiveData<Int>
+        get() = _resourceType
+
+    private val _currentPrintExercise = MutableLiveData<PrintExercises>()
+    val currentPrintExercise: LiveData<PrintExercises>
+        get() = _currentPrintExercise
+
+    private val _currentDigitalExercise = MutableLiveData<DigitalExercises>()
+    val currentDigitalExercise: LiveData<DigitalExercises>
+        get() = _currentDigitalExercise
 
     init {
         val referenceDao = ReferenceDatabase.getDatabase(application, viewModelScope).referenceDao()
@@ -33,8 +49,18 @@ class ReferenceMenuViewModel(application: Application): AndroidViewModel(applica
         _selectedId.value = 0
     }
 
-    fun setSelectedId(id: Long) {
+    fun setSelectedId(id: Int) {
         _selectedId.value = id
+    }
+
+    fun setResourceType(type: Int) {
+        _resourceType.value = type
+        if(_resourceType.value == 0) { // i.e. we clicked on a print exercise
+            _currentPrintExercise.value = allPrintExercises.value?.get(_selectedId.value!!)
+        }
+        else
+            _currentDigitalExercise.value = allDigitalExercises.value?.get(_selectedId.value!!)
+
     }
 
     fun insertPrint(ex: PrintExercises) = viewModelScope.launch(Dispatchers.IO) {

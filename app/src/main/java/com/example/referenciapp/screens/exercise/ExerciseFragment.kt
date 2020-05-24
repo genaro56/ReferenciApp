@@ -23,6 +23,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.referenciapp.R
 import com.example.referenciapp.ReferenceMenuViewModel
+import com.example.referenciapp.database.PrintExercises
 import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_exercise.view.*
@@ -177,13 +178,20 @@ class ExerciseFragment : Fragment() {
         // Set the View Model to observe the selected exercise.
         viewModel = ViewModelProvider(requireNotNull(activity)).get(ReferenceMenuViewModel::class.java)
 
-        viewModel.selectedId.observe(viewLifecycleOwner, Observer {
+        if(viewModel.resourceType.value == 0) {
             Toast.makeText(
                 context,
-                "$it",
+                "Print: ${viewModel.currentPrintExercise.value!!.title}",
                 Toast.LENGTH_SHORT
             ).show()
-        })
+        }
+        else {
+            Toast.makeText(
+                context,
+                "Digital: ${viewModel.currentDigitalExercise.value!!.title}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_exercise, container, false)

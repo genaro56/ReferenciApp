@@ -53,7 +53,8 @@ class DigitalExerciseListAdapter(
             holder.completionBar.setBackgroundColor(Color.GREEN)
 
         holder.itemView.setOnClickListener{view ->
-            vm.setSelectedId(current.id)
+            vm.setSelectedId(position)
+            vm.setResourceType(1)
             view.findNavController().navigate(R.id.action_global_exerciseFragment)
         }
     }
