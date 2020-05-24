@@ -30,12 +30,14 @@ class DigitalTabFragment : Fragment() {
             false
         )
 
+        // We use requireActivity() to use the shared ViewModel.
+        referenceViewModel = ViewModelProvider(requireActivity()).get(ReferenceMenuViewModel::class.java)
+
         val recyclerView = binding.digitalTabRecycler
-        val adapter = DigitalExerciseListAdapter(requireNotNull(context))
+        val adapter = DigitalExerciseListAdapter(requireNotNull(context), referenceViewModel)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireNotNull(context))
 
-        referenceViewModel = ViewModelProvider(this).get(ReferenceMenuViewModel::class.java)
         referenceViewModel.allDigitalExercises.observe(viewLifecycleOwner, Observer { exercises ->
             exercises?.let { adapter.setExercises(it)}
         })

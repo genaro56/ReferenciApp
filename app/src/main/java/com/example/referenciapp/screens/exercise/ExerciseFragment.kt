@@ -14,12 +14,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.referenciapp.R
-import com.example.referenciapp.databinding.FragmentExerciseBindingImpl
+import com.example.referenciapp.ReferenceMenuViewModel
+import com.example.referenciapp.database.PrintExercises
+import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_exercise.view.*
 import kotlin.math.roundToInt
@@ -30,6 +35,8 @@ import kotlin.math.roundToInt
  */
 @Suppress("DEPRECATION")
 class ExerciseFragment : Fragment() {
+
+    lateinit var viewModel: ReferenceMenuViewModel
     companion object {
         // Default card elevation.
         const val CARD_ELEVATION_DEFAULT_DP: Float = 2f
@@ -161,12 +168,31 @@ class ExerciseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentExerciseBindingImpl = DataBindingUtil.inflate(
+        val binding: FragmentExerciseBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_exercise,
             container,
             false
         )
+
+        // Set the View Model to observe the selected exercise.
+        viewModel = ViewModelProvider(requireNotNull(activity)).get(ReferenceMenuViewModel::class.java)
+
+        if(viewModel.resourceType.value == 0) {
+            Toast.makeText(
+                context,
+                "Print: ${viewModel.currentPrintExercise.value!!.title}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        else {
+            Toast.makeText(
+                context,
+                "Digital: ${viewModel.currentDigitalExercise.value!!.title}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_exercise, container, false)
         val context = activity as AppCompatActivity

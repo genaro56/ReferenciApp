@@ -29,12 +29,14 @@ class PaperTabFragment : Fragment() {
             false
         )
 
+        // We use requireActivity to use the /shared/ ViewModel
+        referenceViewModel = ViewModelProvider(requireActivity()).get(ReferenceMenuViewModel::class.java)
+
         val recyclerView = binding.paperRecyclerView
-        val adapter = PrintExerciseListAdapter(requireNotNull(context))
+        val adapter = PrintExerciseListAdapter(requireNotNull(context), referenceViewModel)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireNotNull(context))
 
-        referenceViewModel = ViewModelProvider(this).get(ReferenceMenuViewModel::class.java)
         referenceViewModel.allPrintExercises.observe(viewLifecycleOwner, Observer { exercises ->
             exercises?.let { adapter.setExercises(it)}
         })
