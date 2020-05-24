@@ -68,7 +68,7 @@ data class PrintExercises(
 
     // Exercise related info
     val resourceType: Int = 0,
-    val exerciseType: Int = 0,
+    val exerciseType: Int = 1,
     val description: String = "",
     val feedback: String = "",
     var completed: Boolean = false
@@ -123,7 +123,7 @@ data class DigitalExercises(
 
     // Exercise related info
     val resourceType: Int = 0,
-    val exerciseType: Int = 0,
+    val exerciseType: Int = 1,
     val description: String = "",
     val feedback: String = "",
     var completed: Boolean = false
