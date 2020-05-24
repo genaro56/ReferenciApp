@@ -71,7 +71,7 @@ data class PrintExercises(
     val exerciseType: Int = 0,
     val description: String = "",
     val feedback: String = "",
-    val completed: Boolean = false
+    var completed: Boolean = false
 )
 
 // DIGITAL
@@ -126,5 +126,5 @@ data class DigitalExercises(
     val exerciseType: Int = 0,
     val description: String = "",
     val feedback: String = "",
-    val completed: Boolean = false
+    var completed: Boolean = false
 )
