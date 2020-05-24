@@ -37,7 +37,7 @@ data class PrintExercises(
     // book
     val authors: String = "",
     val isEditor: Boolean = false,
-    val editorString: String = "(Ed.)",
+    val editorString: String = "(Ed.).",
     val year: String = "",
     val title: String = "",
     val city: String = "",
@@ -109,17 +109,17 @@ data class DigitalExercises(
     val pages: String = "",
 
     // Blog
-    val blogtag: String = "[Mensaje en un blog]",
+    val blogtag: String = "[Mensaje en un blog].",
 
     // Tweet
     val tweet: String = "",
-    val tweetTag: String = "[Tweet]",
+    val tweetTag: String = "[Tweet].",
 
     // Video, videocall
-    val videoTag: String = "[archivo de video]",
+    val videoTag: String = "[Archivo de video].",
 
     // Images
-    val imgTag: String = "[fotografía]",
+    val imgTag: String = "[Fotografía].",
 
     // Exercise related info
     val resourceType: Int = 0,
