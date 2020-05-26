@@ -87,6 +87,7 @@ public abstract class ReferenceDatabase : RoomDatabase() {
                             city = "Zaragoza:",
                             publisher = "Universidad de Zaragoza.",
                             resourceType = 2,
+                            exerciseType = 2,
                             description = "Capítulo de libro"
                         ),
                         PrintExercises(

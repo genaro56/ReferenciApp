@@ -14,7 +14,8 @@ import kotlinx.coroutines.launch
 
 class ReferenceMenuViewModel(application: Application): AndroidViewModel(application) {
     private val repository: ReferenceRepository
-
+//    exercises LiveData Lists
+//    allPrintExercise.value[index] to access
     val allPrintExercises: LiveData<List<PrintExercises>>
     val allDigitalExercises: LiveData<List<DigitalExercises>>
 

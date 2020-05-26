@@ -2,11 +2,13 @@ package com.example.referenciapp.recycler
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -16,7 +18,7 @@ import com.example.referenciapp.ReferenceMenuViewModel
 import com.example.referenciapp.database.PrintExercises
 import kotlinx.android.synthetic.main.list_selection_view_holder.view.*
 
-class PrintExerciseListAdapter (
+class PrintExerciseListAdapter(
     context: Context,
     viewModel: ReferenceMenuViewModel
 ) : RecyclerView.Adapter<PrintExerciseListAdapter.ExerciseViewHolder>() {
@@ -38,16 +40,35 @@ class PrintExerciseListAdapter (
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
         val current = exercises[position]
-        holder.exerciseLabel.text = "Ejercicio ${position + 1}"
+        val title = "Ejercicio ${position + 1}"
+        holder.exerciseLabel.text = title
         holder.exerciseTitle.text = current.description
-
-        if(current.completed)
+        if (current.completed) {
             holder.completionBar.setBackgroundColor(Color.GREEN)
+        }
+        else
+            holder.completionBar.setBackgroundColor(Color.LTGRAY)
 
-        holder.itemView.setOnClickListener{view ->
+        holder.itemView.setOnClickListener { view ->
             vm.setSelectedId(position)
             vm.setResourceType(0)
-            view.findNavController().navigate(R.id.action_global_exerciseFragment)
+            val bundle = Bundle()
+            bundle.putString("title", title)
+            when (current.exerciseType) {
+                1 -> {
+                    view.findNavController().navigate(R.id.action_global_exerciseFragment, bundle)
+                }
+                2 -> {
+                    view.findNavController().navigate(R.id.action_global_exerciseFragment2, bundle)
+                }
+                else -> {
+                    Toast.makeText(
+                        holder.itemView.context,
+                        "The current exercise does not hold an exercise type yet",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
