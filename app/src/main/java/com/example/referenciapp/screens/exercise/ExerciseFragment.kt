@@ -1,9 +1,11 @@
 package com.example.referenciapp.screens.exercise
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -44,6 +46,15 @@ class ExerciseFragment : Fragment() {
                 return false
             }
 
+            override fun clearView(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ) {
+                super.clearView(recyclerView, viewHolder)
+                exerciseViewModel.setAttrs(
+                    exerciseViewModel.attributes.value!!
+                )
+            }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) { }
     })
 
@@ -74,18 +85,34 @@ class ExerciseFragment : Fragment() {
 
         // Unpack the current exercise
         val currentExercise: Any
+        val correctAnswer: List<String>
+        var attrs: List<String>
         if(appViewModel.resourceType.value == 0) {
             // It is a print exercise
             currentExercise = appViewModel.currentPrintExercise.value!!
+            correctAnswer = extractPrintFields(currentExercise)
+            attrs = correctAnswer
+
+            while(attrs == correctAnswer) {
+                attrs = attrs.shuffled()
+            }
+
             exerciseViewModel.setAttrs(
-                extractPrintFields(currentExercise)
+                attrs
             )
         }
         else {
             // It is a digital exercise
             currentExercise = appViewModel.currentDigitalExercise.value!!
+            correctAnswer = extractDigitalFields(currentExercise)
+            attrs = correctAnswer
+
+            while(attrs == correctAnswer) {
+                attrs = attrs.shuffled()
+            }
+
             exerciseViewModel.setAttrs(
-                extractDigitalFields(currentExercise)
+                attrs
             )
         }
 
@@ -93,9 +120,20 @@ class ExerciseFragment : Fragment() {
         // Observe the current exercise attributes to update the RecyclerView
         exerciseViewModel.attributes.observe(viewLifecycleOwner, Observer { attributes ->
             attributes?.let { adapter.setAttributes(attributes) }
+            checkAnswer(correctAnswer, attributes)
         })
 
         return binding.root
+    }
+
+    private fun checkAnswer(correctAnswer: List<String>, attributes: List<String>?) {
+        if(correctAnswer == attributes) {
+            Toast.makeText(
+                context,
+                "¡Excelente!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun extractDigitalFields(currentExercise: DigitalExercises): List<String> {
@@ -121,7 +159,7 @@ class ExerciseFragment : Fragment() {
             }
         }
 
-        return fields
+        return fields.filter { x -> x != "" }
     }
 
     private fun extractPrintFields(currentExercise: PrintExercises): List<String> {
@@ -201,6 +239,6 @@ class ExerciseFragment : Fragment() {
             }
         }
 
-        return fields
+        return fields.filter { x -> x != "" }
     }
 }
