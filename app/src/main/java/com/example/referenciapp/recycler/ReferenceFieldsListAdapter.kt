@@ -19,7 +19,6 @@ class ReferenceFieldsListAdapter(
     private var attributes = emptyList<String>()
 
     inner class FieldViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val fieldLabel = itemView.fieldLabel as TextView
         val fieldValueTextView = itemView.fieldTextView as TextView
     }
 

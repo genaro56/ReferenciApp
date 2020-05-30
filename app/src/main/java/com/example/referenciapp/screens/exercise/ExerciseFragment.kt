@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.referenciapp.ExerciseViewModel
 import com.example.referenciapp.R
 import com.example.referenciapp.ReferenceMenuViewModel
+import com.example.referenciapp.database.DigitalExercises
 import com.example.referenciapp.database.PrintExercises
 import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.example.referenciapp.recycler.ReferenceFieldsListAdapter
@@ -40,11 +41,13 @@ class ExerciseFragment : Fragment() {
         exerciseViewModel =
             ViewModelProvider(requireNotNull(activity)).get(ExerciseViewModel::class.java)
 
+        // Setup the recycler view
         val recyclerView = binding.referenceFieldsRecycler
         val adapter = ReferenceFieldsListAdapter(requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        // Unpack the current exercise
         val currentExercise: Any
         if(appViewModel.resourceType.value == 0) {
             // It is a print exercise
@@ -55,16 +58,45 @@ class ExerciseFragment : Fragment() {
         }
         else {
             // It is a digital exercise
-            currentExercise = appViewModel.currentDigitalExercise
-
-
+            currentExercise = appViewModel.currentDigitalExercise.value!!
+            exerciseViewModel.setAttrs(
+                extractDigitalFields(currentExercise)
+            )
         }
 
+
+        // Observe the current exercise attributes to update the RecyclerView
         exerciseViewModel.attributes.observe(viewLifecycleOwner, Observer { attributes ->
             attributes?.let { adapter.setAttributes(attributes) }
         })
 
         return binding.root
+    }
+
+    private fun extractDigitalFields(currentExercise: DigitalExercises): List<String> {
+        var fields = emptyList<String>()
+
+        when (currentExercise.resourceType) {
+            1 -> {
+                fields = listOf<String>(
+                    currentExercise.authors,
+                    currentExercise.year,
+                    currentExercise.title,
+                    currentExercise.url
+                )
+            }
+            2 -> {
+                fields = listOf<String>(
+                    currentExercise.term,
+                    currentExercise.year,
+                    currentExercise.institution,
+                    currentExercise.edition,
+                    currentExercise.source
+                )
+            }
+        }
+
+        return fields
     }
 
     private fun extractPrintFields(currentExercise: PrintExercises): List<String> {
