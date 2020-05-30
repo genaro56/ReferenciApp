@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listView"
+    android:id="@+id/referenceFieldView"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,26 +9,19 @@
     android:layout_marginTop="5dp">
 
     <TextView
-        android:id="@+id/exerciseLabel"
+        android:id="@+id/fieldLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="18sp"
-        android:layout_marginBottom="5dp"
-        android:text="Ejercicio:"/>
+        android:layout_marginBottom="5dp"/>
 
     <TextView
-        android:id="@+id/exerciseTitle"
+        android:id="@+id/fieldTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:layout_marginBottom="5dp"
         android:layout_weight="3"
         />
-
-    <ImageView
-        android:id="@+id/completionBar"
-        android:layout_width="match_parent"
-        android:layout_height="6dp"
-        android:background="#ddd"/>
 </LinearLayout>
