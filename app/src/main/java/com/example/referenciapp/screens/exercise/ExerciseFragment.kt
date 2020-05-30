@@ -8,7 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.ExerciseViewModel
 import com.example.referenciapp.R
 import com.example.referenciapp.ReferenceMenuViewModel
@@ -16,12 +18,34 @@ import com.example.referenciapp.database.DigitalExercises
 import com.example.referenciapp.database.PrintExercises
 import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.example.referenciapp.recycler.ReferenceFieldsListAdapter
+import java.util.*
 
 @Suppress("DEPRECATION")
 class ExerciseFragment : Fragment() {
 
     private lateinit var appViewModel: ReferenceMenuViewModel
     private lateinit var exerciseViewModel: ExerciseViewModel
+    private lateinit var adapter: ReferenceFieldsListAdapter
+
+    val dragAndDrop =
+        ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(
+        ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val fromPosition = viewHolder.adapterPosition
+                val toPosition = target.adapterPosition
+
+                Collections.swap(exerciseViewModel.attributes.value!!, fromPosition, toPosition)
+                adapter.notifyItemMoved(fromPosition, toPosition)
+
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) { }
+    })
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +67,10 @@ class ExerciseFragment : Fragment() {
 
         // Setup the recycler view
         val recyclerView = binding.referenceFieldsRecycler
-        val adapter = ReferenceFieldsListAdapter(requireContext())
+        adapter = ReferenceFieldsListAdapter(requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        dragAndDrop.attachToRecyclerView(recyclerView)
 
         // Unpack the current exercise
         val currentExercise: Any
