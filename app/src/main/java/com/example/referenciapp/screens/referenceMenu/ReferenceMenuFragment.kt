@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.referenciapp.tabs.digitalTab.DigitalTabFragment
 import com.example.referenciapp.tabs.paperTab.PaperTabFragment
@@ -38,6 +39,10 @@ class ReferenceMenuFragment : Fragment() {
         tabLayout.setupWithViewPager(viewPager)
         tabLayout.getTabAt(0)!!.setIcon(R.drawable.ic_description_black_24dp)
         tabLayout.getTabAt(1)!!.setIcon(R.drawable.ic_desktop_mac_black_24dp)
+
+        val supportActionBar = (activity as AppCompatActivity).supportActionBar
+        supportActionBar?.title = "Lista de ejercicios"
+        supportActionBar?.subtitle = ""
 
         return binding.root
     }

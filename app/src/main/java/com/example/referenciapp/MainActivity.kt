@@ -20,5 +20,8 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         referenceViewModel = ViewModelProvider(this).get(ReferenceMenuViewModel::class.java)
+
+        setSupportActionBar(binding.topAppBar)
+
     }
 }

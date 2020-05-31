@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -86,6 +88,9 @@ class ExerciseFragment : Fragment() {
             false
         )
 
+        // Setup the title in the support action bar
+        val supportActionBar = (activity as AppCompatActivity).supportActionBar
+
         // Set the View Models to observe the selected exercise and update the recycler view
         appViewModel =
             ViewModelProvider(requireNotNull(activity)).get(ReferenceMenuViewModel::class.java)
@@ -107,6 +112,7 @@ class ExerciseFragment : Fragment() {
         if(appViewModel.resourceType.value == 0) {
             // It is a print exercise
             currentExercise = appViewModel.currentPrintExercise.value!!
+            titleBarSetup(supportActionBar, currentExercise.id, currentExercise.description)
             correctAnswer = extractPrintFields(currentExercise)
             attrs = correctAnswer
 
@@ -121,6 +127,7 @@ class ExerciseFragment : Fragment() {
         else {
             // It is a digital exercise
             currentExercise = appViewModel.currentDigitalExercise.value!!
+            titleBarSetup(supportActionBar, currentExercise.id, currentExercise.description)
             correctAnswer = extractDigitalFields(currentExercise)
             attrs = correctAnswer
 
@@ -141,6 +148,11 @@ class ExerciseFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    private fun titleBarSetup(supportActionBar: ActionBar?, id: Long, description: String) {
+        supportActionBar?.title = "Ejercicio $id"
+        supportActionBar?.subtitle = description
     }
 
     private fun checkAnswer(correctAnswer: List<String>, attributes: List<String>?) {
@@ -166,7 +178,6 @@ class ExerciseFragment : Fragment() {
                             "\n\n"
                 )
                 .setNeutralButton("Atrás") { _, _ ->
-//                    requireView().findNavController().navigate(R.id.action_global_exerciseFragment2)
                     requireView().findNavController().popBackStack()
                 }
                 .show()
