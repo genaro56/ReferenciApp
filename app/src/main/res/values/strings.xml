@@ -7,4 +7,6 @@
     <string name="listadoButtonText">Listado de Fichas</string>
     <string name="tipo_de_referencia">Tipo de referencia:</string>
     <string name="ejercicio_no">Ejercicio no.</string>
+    <string name="instrucciones_label">Instrucciones</string>
+    <string name="instructions_text">Ordena los elementos de la ficha arrastrándolos del ícono</string>
 </resources>

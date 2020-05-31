@@ -211,7 +211,7 @@ public abstract class ReferenceDatabase : RoomDatabase() {
                             id = 0,
                             authors = "Merkh, D. y Merkh, C. S.",
                             year = "(2015)",
-                            title = "101 ideas creativas para familias",
+                            title = "101 ideas creativas para familias.",
                             url = "Recuperado de http://0-site.ebrary.com.jabega.uma.es/lib/bibliotecauma/detail.action?docID=11362387",
                             resourceType = 1,
                             exerciseType = 1,

@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_DRAG
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ import com.example.referenciapp.database.DigitalExercises
 import com.example.referenciapp.database.PrintExercises
 import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.example.referenciapp.recycler.ReferenceFieldsListAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.*
 
 @Suppress("DEPRECATION")
@@ -143,11 +145,31 @@ class ExerciseFragment : Fragment() {
 
     private fun checkAnswer(correctAnswer: List<String>, attributes: List<String>?) {
         if(correctAnswer == attributes) {
-            Toast.makeText(
-                context,
-                "¡Excelente!",
-                Toast.LENGTH_SHORT
-            ).show()
+            // Update the db
+            if(appViewModel.resourceType.value == 0) {
+                val newPrintEx: PrintExercises = appViewModel.currentPrintExercise.value!!
+                newPrintEx.completed = true
+                appViewModel.updatePrint(newPrintEx)
+            }
+            else if (appViewModel.resourceType.value == 1){
+                val newDigiEx: DigitalExercises = appViewModel.currentDigitalExercise.value!!
+                newDigiEx.completed = true
+                appViewModel.updateDigital(newDigiEx)
+            }
+
+            // Show some feedback
+            MaterialAlertDialogBuilder(context)
+                .setTitle("¡Excelente!")
+                .setMessage(
+                    "\n\nHas completado exitosamente el ejercicio. La referencia resultante es:\n\n" +
+                            ReferenceUtils.concatReference(correctAnswer) +
+                            "\n\n"
+                )
+                .setNeutralButton("Atrás") { _, _ ->
+//                    requireView().findNavController().navigate(R.id.action_global_exerciseFragment2)
+                    requireView().findNavController().popBackStack()
+                }
+                .show()
         }
     }
 

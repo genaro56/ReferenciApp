@@ -4,7 +4,7 @@ import java.util.*
 import kotlin.reflect.typeOf
 
 object ReferenceUtils {
-    fun concatReference(reference: MutableList<String>): String {
+    fun concatReference(reference: List<String>): String {
         return reference.joinToString("") { it }
     }
 

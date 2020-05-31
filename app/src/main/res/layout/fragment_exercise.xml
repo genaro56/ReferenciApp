@@ -14,16 +14,17 @@
             android:id="@+id/instructionsTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="5"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:text="@string/instrucciones_label"
             />
 
         <TextView
             android:id="@+id/resultingReferenceTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="5"
+            android:text="@string/instructions_text"
             />
 
         <androidx.recyclerview.widget.RecyclerView
