@@ -151,7 +151,7 @@ class ExerciseFragment : Fragment() {
     }
 
     private fun titleBarSetup(supportActionBar: ActionBar?, id: Long, description: String) {
-        supportActionBar?.title = "Ejercicio $id"
+        supportActionBar?.title = "Ejercicio ${id + 1}"
         supportActionBar?.subtitle = description
     }
 
@@ -171,6 +171,7 @@ class ExerciseFragment : Fragment() {
 
             // Show some feedback
             MaterialAlertDialogBuilder(context)
+                .setCancelable(false)
                 .setTitle("¡Excelente!")
                 .setMessage(
                     "\n\nHas completado exitosamente el ejercicio. La referencia resultante es:\n\n" +

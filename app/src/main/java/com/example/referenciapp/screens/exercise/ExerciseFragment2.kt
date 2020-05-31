@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.referenciapp.ExerciseViewModel
 import com.example.referenciapp.R
 import com.example.referenciapp.ReferenceMenuViewModel
@@ -21,6 +22,7 @@ import com.example.referenciapp.database.PrintExercises
 import com.example.referenciapp.databinding.FragmentExercise2Binding
 import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.example.referenciapp.databinding.FragmentExerciseBindingImpl
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_exercise2.*
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -124,18 +126,65 @@ class ExerciseFragment2 : Fragment() {
             }
         }
 
-        falseButton.setOnClickListener {
-            answerQuestion(false)
+        trueButton.setOnClickListener {
+            checkAnswer(true, correctAnswer, attrs)
         }
 
-        trueButton.setOnClickListener {
-            answerQuestion(true)
+        falseButton.setOnClickListener {
+            checkAnswer(false, correctAnswer, attrs)
+
         }
+
         return binding.root
     }
 
+    private fun checkAnswer(answer: Boolean, correctAnswer: List<String>, attrs: List<String>) {
+        if(correctAnswer == attrs) {
+            if(answer)
+                correct("La ficha de referencia está correctamente construida.")
+            else
+                incorrect("La ficha de referencia sí está en orden.")
+        }
+        else {
+            if(!answer)
+                correct("La ficha está en desorden.")
+           else
+                incorrect("La ficha está en desorden.")
+        }
+    }
+
+    private fun correct(msg: String) {
+        MaterialAlertDialogBuilder(context)
+            .setCancelable(false)
+            .setTitle("¡Excelente!")
+            .setMessage(msg)
+            .setNeutralButton("Atrás") { _, _ ->
+                requireView().findNavController().popBackStack()
+            }
+            .show()
+
+        updateDB()
+    }
+
+    private fun incorrect(msg: String) {
+        MaterialAlertDialogBuilder(context)
+            .setCancelable(false)
+            .setTitle("Respuesta incorrecta")
+            .setMessage(msg)
+            .setNegativeButton("Atrás") { _, _ ->
+                requireView().findNavController().popBackStack()
+            }
+            .setPositiveButton("Reintentar") { _, _ ->
+                parentFragmentManager
+                    .beginTransaction()
+                    .detach(this)
+                    .attach(this).commit()
+            }
+            .show()
+    }
+
     private fun titleBarSetup(supportActionBar: ActionBar?, id: Long, description: String) {
-        supportActionBar?.title = "Ejercicio $id"
+        supportActionBar?.title = "Ejercicio ${id + 1}"
         supportActionBar?.subtitle = description
     }
 
