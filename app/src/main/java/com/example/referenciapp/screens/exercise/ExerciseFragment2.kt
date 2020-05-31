@@ -27,8 +27,6 @@ import kotlinx.android.synthetic.main.fragment_exercise2.*
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
-data class Question(var question: String, var answer: Boolean)
-
 class ExerciseFragment2 : Fragment() {
     private lateinit var appViewModel: ReferenceMenuViewModel
     private lateinit var exerciseViewModel: ExerciseViewModel

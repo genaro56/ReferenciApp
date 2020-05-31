@@ -24,21 +24,21 @@
             android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:text="@string/fichasButtonText"/>
+            android:text="@string/listadoButtonText"/>
 
         <ImageView
             android:id="@+id/listImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/list"/>
+            app:srcCompat="@drawable/question"/>
 
 
         <Button
             android:id="@+id/listMenuButton"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:text="@string/listadoButtonText"/>
+            android:text="@string/aboutButtonText"/>
 
     </LinearLayout>
 </layout>
