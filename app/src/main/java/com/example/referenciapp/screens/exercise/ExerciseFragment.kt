@@ -1,7 +1,6 @@
 package com.example.referenciapp.screens.exercise
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_DRAG
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.ExerciseViewModel
@@ -32,6 +32,9 @@ class ExerciseFragment : Fragment() {
     val dragAndDrop =
         ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(
         ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
+
+            override fun isLongPressDragEnabled(): Boolean = false
+
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -51,9 +54,21 @@ class ExerciseFragment : Fragment() {
                 viewHolder: RecyclerView.ViewHolder
             ) {
                 super.clearView(recyclerView, viewHolder)
+
+                // Update the view model
                 exerciseViewModel.setAttrs(
                     exerciseViewModel.attributes.value!!
                 )
+
+                viewHolder.itemView.alpha = 1.0f
+
+            }
+
+            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                super.onSelectedChanged(viewHolder, actionState)
+
+                if(actionState == ACTION_STATE_DRAG)
+                    viewHolder?.itemView?.alpha = 0.5f
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) { }
     })
@@ -78,7 +93,7 @@ class ExerciseFragment : Fragment() {
 
         // Setup the recycler view
         val recyclerView = binding.referenceFieldsRecycler
-        adapter = ReferenceFieldsListAdapter(requireContext())
+        adapter = ReferenceFieldsListAdapter(requireContext(), dragAndDrop)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         dragAndDrop.attachToRecyclerView(recyclerView)
@@ -170,7 +185,7 @@ class ExerciseFragment : Fragment() {
                 fields = listOf<String>(
                     currentExercise.authors,
                     currentExercise.year,
-                    currentExercise.editors,
+                    if (currentExercise.isEditor) currentExercise.editorString else "",
                     currentExercise.title,
                     currentExercise.city,
                     currentExercise.country,
@@ -181,24 +196,24 @@ class ExerciseFragment : Fragment() {
                 fields = listOf<String>(
                     currentExercise.authors,
                     currentExercise.year,
-                    currentExercise.editors,
-                    currentExercise.title,
-                    currentExercise.city,
-                    currentExercise.country,
-                    currentExercise.publisher,
                     currentExercise.chapterTitle,
                     currentExercise.editors,
-                    currentExercise.pages
+                    currentExercise.title,
+                    currentExercise.pages,
+                    currentExercise.city,
+                    currentExercise.country,
+                    currentExercise.publisher
                 )
             }
             3 -> {
                 fields = listOf<String>(
                     currentExercise.authors,
                     currentExercise.year,
-                    currentExercise.city,
                     currentExercise.term,
                     currentExercise.source,
                     currentExercise.edition,
+                    currentExercise.city,
+                    currentExercise.country,
                     currentExercise.publisher
                 )
             }
@@ -206,15 +221,12 @@ class ExerciseFragment : Fragment() {
                 fields = listOf<String>(
                     currentExercise.authors,
                     currentExercise.year,
-                    currentExercise.title,
-                    currentExercise.city,
+                    currentExercise.term,
                     currentExercise.source,
-                    currentExercise.country,
-                    currentExercise.publisher,
-                    currentExercise.chapterTitle,
-                    currentExercise.editors,
                     currentExercise.volumeAndPages,
-                    currentExercise.term
+                    currentExercise.city,
+                    currentExercise.country,
+                    currentExercise.publisher
                 )
             }
             5 -> {
