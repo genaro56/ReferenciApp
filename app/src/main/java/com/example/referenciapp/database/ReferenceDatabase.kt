@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.lang.ref.Reference
 
-@Database(entities = [PrintExercises::class, DigitalExercises::class], version = 1, exportSchema = false)
+@Database(entities = [PrintExercises::class, DigitalExercises::class], version = 2, exportSchema = false)
 public abstract class ReferenceDatabase : RoomDatabase() {
 
     abstract fun referenceDao(): ReferenceDao

@@ -202,7 +202,80 @@ class ExerciseFragment : Fragment() {
                     currentExercise.year,
                     currentExercise.institution,
                     currentExercise.edition,
-                    currentExercise.source
+                    currentExercise.url
+                )
+            }
+            3 -> {
+                fields = listOf<String>(
+                    currentExercise.authors,
+                    currentExercise.year,
+                    currentExercise.term,
+                    currentExercise.editor,
+                    if(currentExercise.hasEditor) currentExercise.editorString else "",
+                    currentExercise.source,
+                    currentExercise.edition,
+                    currentExercise.city,
+                    currentExercise.country,
+                    currentExercise.publisher,
+                    currentExercise.url
+                )
+            }
+            4 -> {
+                fields = listOf<String>(
+                    currentExercise.corp,
+                    currentExercise.year,
+                    currentExercise.title,
+                    currentExercise.edition,
+                    currentExercise.city,
+                    currentExercise.country,
+                    currentExercise.publisher
+                )
+            }
+            5 -> {
+                fields = listOf<String>(
+                    currentExercise.authors,
+                    currentExercise.year,
+                    currentExercise.title,
+                    currentExercise.journal,
+                    currentExercise.issue,
+                    currentExercise.pages,
+                    currentExercise.url
+                )
+            }
+            6 -> {
+                fields = listOf<String>(
+                    currentExercise.authors,
+                    currentExercise.date,
+                    currentExercise.title,
+                    currentExercise.blogtag,
+                    currentExercise.url
+                )
+            }
+            7 -> {
+                fields = listOf<String>(
+                    currentExercise.authors,
+                    currentExercise.date,
+                    currentExercise.tweet,
+                    currentExercise.tweetTag,
+                    currentExercise.url
+                )
+            }
+            8 -> {
+                fields = listOf<String>(
+                    currentExercise.authors,
+                    currentExercise.date,
+                    currentExercise.title,
+                    currentExercise.videoTag,
+                    currentExercise.url
+                )
+            }
+            9 -> {
+                fields = listOf<String>(
+                    currentExercise.authors,
+                    currentExercise.date,
+                    currentExercise.title,
+                    currentExercise.imgTag,
+                    currentExercise.url
                 )
             }
         }
