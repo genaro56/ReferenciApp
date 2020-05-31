@@ -9,4 +9,7 @@
     <string name="ejercicio_no">Ejercicio no.</string>
     <string name="instrucciones_label">Instrucciones</string>
     <string name="instructions_text">Ordena los elementos de la ficha arrastrándolos del ícono</string>
+    <string name="instructions_text_true_false">¿Está esta ficha de referencia correctamente ordenada?</string>
+    <string name="verdadero">Verdadero</string>
+    <string name="falso">Falso</string>
 </resources>

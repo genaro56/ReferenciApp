@@ -6,4 +6,5 @@
     <color name="colorAccent">@android:color/holo_purple</color>
     <color name="colorAccentVariant">#9C27B0</color>
     <color name="colorSurface">#eee</color>
+    <color name="referenceBackground">#F1D592</color>
 </resources>
