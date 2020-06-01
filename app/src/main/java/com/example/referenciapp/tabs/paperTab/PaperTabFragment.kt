@@ -39,6 +39,11 @@ class PaperTabFragment : Fragment() {
 
         referenceViewModel.allPrintExercises.observe(viewLifecycleOwner, Observer { exercises ->
             exercises?.let { adapter.setExercises(it)}
+            referenceViewModel.countCompletePrint()
+        })
+
+        referenceViewModel.numCompletePrint.observe(viewLifecycleOwner, Observer { num ->
+            binding.progressLabel.text = "Progreso: ${num} / ${adapter.itemCount}"
         })
 
         return binding.root
