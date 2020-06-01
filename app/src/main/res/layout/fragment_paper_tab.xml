@@ -7,7 +7,7 @@
     <data>
        <variable
            name="viewModel"
-           type="com.example.referenciapp.ReferenceMenuViewModel" />
+           type="com.app.referenciapp.ReferenceMenuViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
