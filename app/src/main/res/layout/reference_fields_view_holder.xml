@@ -32,6 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:drawableEnd="@drawable/ic_drag_handle_black_24dp"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

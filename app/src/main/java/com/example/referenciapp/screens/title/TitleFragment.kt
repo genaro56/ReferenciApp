@@ -29,15 +29,14 @@ class TitleFragment : Fragment() {
         // Overall steps: (this code skips some things thanks to Android KTX)
         // 1. Find the NavHostFragment Navigation Controller
         // 2. Use navigate() with the Action created in the navigation resource graph
-        binding.referenceMenuButton.setOnClickListener(
-            Navigation.
-                createNavigateOnClickListener(
-                    R.id.action_titleFragment_to_referenceMenuFragment
-                )
+        binding.referenceMenuCardButton.setOnClickListener(
+            Navigation.createNavigateOnClickListener(
+                R.id.action_titleFragment_to_referenceMenuFragment
+            )
         )
 
         // Same, but for the list of references button
-        binding.listMenuButton.setOnClickListener(
+        binding.aboutMenuButton.setOnClickListener(
             Navigation.
                 createNavigateOnClickListener(
                     R.id.action_titleFragment_to_listMenuFragment

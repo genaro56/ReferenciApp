@@ -237,7 +237,7 @@ public abstract class ReferenceDatabase : RoomDatabase() {
                         ),
                         DigitalExercises(
                             id = 3,
-                            title = "Thesis. ",
+                            term = "Thesis. ",
                             year = "(s.f.). ",
                             institution = "En Merriam-Webster's online dictionary ",
                             edition = "(11va. ed). ",
