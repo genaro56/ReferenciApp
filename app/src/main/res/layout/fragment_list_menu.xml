@@ -2,52 +2,55 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/listMenuConstraint"
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        >
+        android:layout_height="match_parent">
 
-        <com.uncopt.android.widget.text.justify.JustifiedTextView
-            android:id="@+id/aboutText"
+        <LinearLayout
+            android:id="@+id/listMenuConstraint"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about"
-            android:layout_margin="20dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            />
+            android:padding="10dp"
+            >
 
-        <com.uncopt.android.widget.text.justify.JustifiedTextView
-            android:id="@+id/aboutAuthors"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/aboutAuthors"
-            android:layout_margin="20dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            />
+            <com.uncopt.android.widget.text.justify.JustifiedTextView
+                android:id="@+id/aboutText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about"
+                android:layout_margin="20dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
 
-        <com.uncopt.android.widget.text.justify.JustifiedTextView
-            android:id="@+id/apaUrl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/apaUrl"
-            android:layout_margin="20dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            android:autoLink="web"
-            />
+            <com.uncopt.android.widget.text.justify.JustifiedTextView
+                android:id="@+id/aboutAuthors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/aboutAuthors"
+                android:layout_margin="20dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                />
 
-        <com.uncopt.android.widget.text.justify.JustifiedTextView
-            android:id="@+id/attribution"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/attributions"
-            android:layout_weight="1"
-            android:gravity="bottom"
-            android:layout_margin="20dp"
-            />
+            <com.uncopt.android.widget.text.justify.JustifiedTextView
+                android:id="@+id/apaUrl"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@string/apaUrl"
+                android:layout_margin="20dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_weight="1"
+                android:autoLink="web"
+                />
 
-    </LinearLayout>
+            <com.uncopt.android.widget.text.justify.JustifiedTextView
+                android:id="@+id/attribution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/attributions"
+                android:layout_margin="20dp"
+                />
+        </LinearLayout>
+    </ScrollView>
 </layout>
 
