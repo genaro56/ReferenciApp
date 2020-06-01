@@ -26,6 +26,21 @@
             https://apastyle.apa.org/6th-edition-resources/
         </a>
     </string>
+    <string name="devsTitle">
+        Los desarrolladores
+    </string>
 
+    <string name="devRick">
+        Andrés Ricardo Vela Garza
+        <a href="https://github.com/argvniyx">
+            https://github.com/argvniyx
+        </a>
+    </string>
+    <string name="devGen">
+        Genaro Martínez Siqueiros
+        <a href="https://github.com/genaro56">
+            https://github.com/genaro56
+        </a>
+    </string>
     <string name="attributions">Los íconos utilizados en el menú principal fueron hechos por Freepik, y tomados de Flaticon.com</string>
 </resources>

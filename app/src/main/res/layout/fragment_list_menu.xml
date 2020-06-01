@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
@@ -44,12 +45,78 @@
                 />
 
             <com.uncopt.android.widget.text.justify.JustifiedTextView
+                android:id="@+id/devsTitle"
+                android:layout_width="351dp"
+                android:layout_height="7dp"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:autoLink="web"
+                android:text="@string/devsTitle"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="213dp"
+                    android:layout_height="45dp"
+                    android:text="@string/devRick"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.428" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="106dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toStartOf="@+id/textView2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/rick" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="163dp">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="213dp"
+                    android:layout_height="45dp"
+                    android:text="@string/devGen"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.428" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="106dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toStartOf="@+id/textView3"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/gen" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.uncopt.android.widget.text.justify.JustifiedTextView
                 android:id="@+id/attribution"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/attributions"
                 android:layout_margin="20dp"
-                />
+                android:text="@string/attributions" />
+
         </LinearLayout>
     </ScrollView>
 </layout>
