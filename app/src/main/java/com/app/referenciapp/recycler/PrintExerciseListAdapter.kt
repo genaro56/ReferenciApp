@@ -38,12 +38,13 @@ class PrintExerciseListAdapter(
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
         val current = exercises[position]
-        holder.exerciseLabel.text = "Ejercicio ${position + 1}"
         val title = "Ejercicio ${position + 1}"
         holder.exerciseLabel.text = title
         holder.exerciseTitle.text = current.description
-        if (current.completed)
+        if (current.completed) {
             holder.completionBar.setBackgroundColor(Color.GREEN)
+        } else
+            holder.completionBar.setBackgroundColor(Color.LTGRAY)
 
         holder.itemView.setOnClickListener { view ->
             vm.setSelectedId(position)
