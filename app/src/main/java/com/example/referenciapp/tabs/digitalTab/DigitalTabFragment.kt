@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,7 +41,13 @@ class DigitalTabFragment : Fragment() {
 
         referenceViewModel.allDigitalExercises.observe(viewLifecycleOwner, Observer { exercises ->
             exercises?.let { adapter.setExercises(it)}
+            referenceViewModel.countCompleteDigital()
         })
+
+        referenceViewModel.numCompleteDigital.observe(viewLifecycleOwner, Observer { num ->
+            binding.progressLabel.text = "Progreso: ${num} / ${adapter.itemCount}"
+        })
+
         return binding.root
     }
 }

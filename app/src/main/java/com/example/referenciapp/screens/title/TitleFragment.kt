@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.referenciapp.R
@@ -42,6 +43,9 @@ class TitleFragment : Fragment() {
                     R.id.action_titleFragment_to_listMenuFragment
                 )
         )
+
+        val supportActionBar = (activity as AppCompatActivity).supportActionBar
+        supportActionBar?.title = "Referenciapp"
 
         return binding.root
     }

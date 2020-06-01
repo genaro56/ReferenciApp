@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.example.referenciapp.ExerciseViewModel
 import com.example.referenciapp.R
 import com.example.referenciapp.ReferenceMenuViewModel
 import com.example.referenciapp.database.DigitalExercises
@@ -19,14 +22,14 @@ import com.example.referenciapp.database.PrintExercises
 import com.example.referenciapp.databinding.FragmentExercise2Binding
 import com.example.referenciapp.databinding.FragmentExerciseBinding
 import com.example.referenciapp.databinding.FragmentExerciseBindingImpl
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_exercise2.*
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
-data class Question(var question: String, var answer: Boolean)
-
 class ExerciseFragment2 : Fragment() {
-    private lateinit var viewModel: ReferenceMenuViewModel
+    private lateinit var appViewModel: ReferenceMenuViewModel
+    private lateinit var exerciseViewModel: ExerciseViewModel
     private val listOfAttributes = mutableListOf<String>()
 
     override fun onCreateView(
@@ -39,138 +42,65 @@ class ExerciseFragment2 : Fragment() {
             container,
             false
         )
+
         val context = activity as AppCompatActivity
+
+        // Setup the title in the support action bar
+        val supportActionBar = context.supportActionBar
+
+        // Set the View Model to observe the selected exercise.
+        appViewModel =
+            ViewModelProvider(requireNotNull(activity)).get(ReferenceMenuViewModel::class.java)
+
+        exerciseViewModel =
+            ViewModelProvider(requireNotNull(activity)).get(ExerciseViewModel::class.java)
+
+        // Unpack the current exercise
+        val currentExercise: Any
+        val correctAnswer: List<String>
+        val attrs: List<String>
+        if(appViewModel.resourceType.value == 0) {
+            // It is a print exercise
+            currentExercise = appViewModel.currentPrintExercise.value!!
+            titleBarSetup(supportActionBar, currentExercise.id, currentExercise.description)
+            correctAnswer = ReferenceUtils.extractPrintFields(currentExercise)
+            attrs =
+                if ((0..10).random().rem(2) == 0)
+                    correctAnswer.shuffled()
+                else correctAnswer
+
+            exerciseViewModel.setAttrs(
+                attrs
+            )
+        }
+        else {
+            // It is a digital exercise
+            currentExercise = appViewModel.currentDigitalExercise.value!!
+            titleBarSetup(supportActionBar, currentExercise.id, currentExercise.description)
+            correctAnswer = ReferenceUtils.extractDigitalFields(currentExercise)
+            attrs =
+                if ((0..10).random().rem(2) == 0)
+                    correctAnswer.shuffled()
+                else correctAnswer
+
+            exerciseViewModel.setAttrs(
+                attrs
+            )
+        }
+
+        // Concatenate and display the string
+        binding.currentReference.text = ReferenceUtils.concatReference(attrs)
 
         // Buttons and UI
         val trueButton: Button = binding.trueButton
         val falseButton: Button = binding.falseButton
-        val questionTitle = binding.questions
-        val referenceType = binding.referenceType2
 
-        // Set the View Model to observe the selected exercise.
-        viewModel =
-            ViewModelProvider(requireNotNull(activity)).get(ReferenceMenuViewModel::class.java)
-
-        val currentReference: Any
-
-        if (viewModel.resourceType.value == 0) {
-            // The exercise is of print type
-            currentReference = viewModel.currentPrintExercise.value!!
-            referenceType.text = currentReference.description
-            when (currentReference.resourceType) {
-                1 -> {
-                    listOfAttributes += listOf<String>(
-                        currentReference.authors,
-                        currentReference.year,
-                        currentReference.editors,
-                        currentReference.title,
-                        currentReference.city,
-                        currentReference.country,
-                        currentReference.publisher
-                    )
-                }
-                2 -> {
-                    listOfAttributes += listOf<String>(
-                        currentReference.authors,
-                        currentReference.year,
-                        currentReference.editors,
-                        currentReference.title,
-                        currentReference.city,
-                        currentReference.country,
-                        currentReference.publisher,
-                        currentReference.chapterTitle,
-                        currentReference.editors,
-                        currentReference.pages
-                    )
-                }
-                3 -> {
-                    listOfAttributes += listOf<String>(
-                        currentReference.authors,
-                        currentReference.year,
-                        currentReference.city,
-                        currentReference.term,
-                        currentReference.source,
-                        currentReference.edition,
-                        currentReference.publisher
-                    )
-                }
-                4 -> {
-                    listOfAttributes += listOf<String>(
-                        currentReference.authors,
-                        currentReference.year,
-                        currentReference.title,
-                        currentReference.city,
-                        currentReference.source,
-                        currentReference.country,
-                        currentReference.publisher,
-                        currentReference.chapterTitle,
-                        currentReference.editors,
-                        currentReference.volumeAndPages,
-                        currentReference.term
-                    )
-                }
-                5 -> {
-                    listOfAttributes += listOf<String>(
-                        currentReference.authors,
-                        currentReference.date,
-                        currentReference.title,
-                        currentReference.newspaper,
-                        currentReference.pages
-                    )
-                }
-                6 -> {
-                    listOfAttributes += listOf<String>(
-                        currentReference.authors,
-                        currentReference.year,
-                        currentReference.title,
-                        currentReference.journal,
-                        currentReference.volume,
-                        currentReference.issue,
-                        currentReference.pages
-                    )
-                }
-                // TODO: unwrap print exercise object
-            }
-            // TODO: unwrap print exercise object
-
-        } else {
-            // The exercise is of digital type
-            currentReference = viewModel.currentDigitalExercise.value!!
-            referenceType.text = currentReference.description
-            when (currentReference.resourceType) {
-                1 -> {
-                    listOfAttributes += listOf<String>(
-                        currentReference.authors,
-                        currentReference.year,
-                        currentReference.title,
-                        currentReference.url
-                    )
-                }
-                2 -> {
-                    listOfAttributes += listOf<String>(
-                        currentReference.term,
-                        currentReference.year,
-                        currentReference.institution,
-                        currentReference.edition,
-                        currentReference.source
-                    )
-                }
-                // TODO: unwrap digital exercise object
-            }
-        }
 
         // Concatenate list of attributes
         val concatQuestion = ReferenceUtils.concatReference(listOfAttributes)
         val shuffledQuestion = if ((0..10).random().rem(2) == 0) ReferenceUtils.concatReference(
             ReferenceUtils.shuffleList(listOfAttributes)
         ) else concatQuestion
-
-        // set exercise question
-        questionTitle.text = shuffledQuestion
-
-        //  set exercise title
-        val referenceTitleTextView = binding.referenceTitle
-        referenceTitleTextView.text = arguments?.getString("title")
 
         fun answerQuestion(selectedAnswer: Boolean) {
             if (selectedAnswer) {
@@ -181,7 +111,6 @@ class ExerciseFragment2 : Fragment() {
                     updateDB()
                 } else {
                     Toast.makeText(context, "¡Respuesta incorrecta!", Toast.LENGTH_LONG).show()
-                    questions.text = "Respuesta correcta: " + concatQuestion
                 }
             } else if (!selectedAnswer) {
                 if (concatQuestion != shuffledQuestion) {
@@ -191,31 +120,82 @@ class ExerciseFragment2 : Fragment() {
                     updateDB()
                 } else {
                     Toast.makeText(context, "¡Respuesta incorrecta!", Toast.LENGTH_LONG).show()
-                    questions.text = "Respuesta correcta: " + concatQuestion
                 }
             }
         }
 
-        falseButton.setOnClickListener {
-            answerQuestion(false)
+        trueButton.setOnClickListener {
+            checkAnswer(true, correctAnswer, attrs)
         }
 
-        trueButton.setOnClickListener {
-            answerQuestion(true)
+        falseButton.setOnClickListener {
+            checkAnswer(false, correctAnswer, attrs)
+
         }
+
         return binding.root
     }
 
-    private fun updateDB() {
-        if(viewModel.resourceType.value == 0) {
-            val updatedExercise: PrintExercises = viewModel.currentPrintExercise.value!!
-            updatedExercise.completed = true
-            viewModel.updatePrint(updatedExercise)
+    private fun checkAnswer(answer: Boolean, correctAnswer: List<String>, attrs: List<String>) {
+        if(correctAnswer == attrs) {
+            if(answer)
+                correct("La ficha de referencia está correctamente construida.")
+            else
+                incorrect("La ficha de referencia sí está en orden.")
         }
-        else if (viewModel.resourceType.value == 1){
-            val updatedExercise: DigitalExercises = viewModel.currentDigitalExercise.value!!
+        else {
+            if(!answer)
+                correct("La ficha está en desorden.")
+           else
+                incorrect("La ficha está en desorden.")
+        }
+    }
+
+    private fun correct(msg: String) {
+        MaterialAlertDialogBuilder(context)
+            .setCancelable(false)
+            .setTitle("¡Excelente!")
+            .setMessage(msg)
+            .setNeutralButton("Atrás") { _, _ ->
+                requireView().findNavController().popBackStack()
+            }
+            .show()
+
+        updateDB()
+    }
+
+    private fun incorrect(msg: String) {
+        MaterialAlertDialogBuilder(context)
+            .setCancelable(false)
+            .setTitle("Respuesta incorrecta")
+            .setMessage(msg)
+            .setNegativeButton("Atrás") { _, _ ->
+                requireView().findNavController().popBackStack()
+            }
+            .setPositiveButton("Reintentar") { _, _ ->
+                parentFragmentManager
+                    .beginTransaction()
+                    .detach(this)
+                    .attach(this).commit()
+            }
+            .show()
+    }
+
+    private fun titleBarSetup(supportActionBar: ActionBar?, id: Long, description: String) {
+        supportActionBar?.title = "Ejercicio ${id + 1}"
+        supportActionBar?.subtitle = description
+    }
+
+    private fun updateDB() {
+        if(appViewModel.resourceType.value == 0) {
+            val updatedExercise: PrintExercises = appViewModel.currentPrintExercise.value!!
             updatedExercise.completed = true
-            viewModel.updateDigital(updatedExercise)
+            appViewModel.updatePrint(updatedExercise)
+        }
+        else if (appViewModel.resourceType.value == 1){
+            val updatedExercise: DigitalExercises = appViewModel.currentDigitalExercise.value!!
+            updatedExercise.completed = true
+            appViewModel.updateDigital(updatedExercise)
         }
     }
 }

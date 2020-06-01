@@ -93,6 +93,7 @@ data class DigitalExercises(
 
     // Digital Encyclopedia
     val hasEditor: Boolean = false,
+    val editorString: String = "(Ed.), ",
     val editor: String = "",
     val source: String = "",
     val city: String = "",

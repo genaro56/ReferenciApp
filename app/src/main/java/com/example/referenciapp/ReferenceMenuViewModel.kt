@@ -42,6 +42,14 @@ class ReferenceMenuViewModel(application: Application): AndroidViewModel(applica
     val currentDigitalExercise: LiveData<DigitalExercises>
         get() = _currentDigitalExercise
 
+    private val _numCompletePrint = MutableLiveData<Int>()
+    val numCompletePrint: LiveData<Int>
+        get() = _numCompletePrint
+
+    private val _numCompleteDigital = MutableLiveData<Int>()
+    val numCompleteDigital: LiveData<Int>
+        get() = _numCompleteDigital
+
     init {
         val referenceDao = ReferenceDatabase.getDatabase(application, viewModelScope).referenceDao()
         repository = ReferenceRepository(referenceDao)
@@ -62,6 +70,14 @@ class ReferenceMenuViewModel(application: Application): AndroidViewModel(applica
         else
             _currentDigitalExercise.value = allDigitalExercises.value?.get(_selectedId.value!!)
 
+    }
+
+    fun countCompletePrint() {
+        _numCompletePrint.value = allPrintExercises.value?.filter { x -> x.completed }?.size
+    }
+
+    fun countCompleteDigital() {
+        _numCompleteDigital.value = allDigitalExercises.value?.filter { x -> x.completed }?.size
     }
 
     fun insertPrint(ex: PrintExercises) = viewModelScope.launch(Dispatchers.IO) {

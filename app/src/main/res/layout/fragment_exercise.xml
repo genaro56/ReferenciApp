@@ -4,161 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".screens.exercise.ExerciseFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/exerciseFragmentConstraint"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <View
-            android:id="@+id/horizontalLine"
+        <TextView
+            android:id="@+id/instructionsTextView"
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/colorArea"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/colorSurface"
-            android:outlineProvider="background"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/horizontalLine"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalLine">
-
-            <LinearLayout
-                android:id="@+id/drag_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:scrollbars="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/area3"
-            android:layout_width="156dp"
-            android:layout_height="29dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorSurface"
-            android:outlineProvider="background"
-            app:cardElevation="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
-            app:layout_constraintStart_toEndOf="@+id/area2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.515">
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/area4"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginBottom="8dp"
-            app:cardElevation="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toEndOf="@+id/area3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.514">
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/area1"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorSurface"
-            android:outlineProvider="background"
-            app:cardElevation="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.514">
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/area2"
-            android:layout_width="43dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorSurface"
-            android:outlineProvider="background"
-            app:cardElevation="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
-            app:layout_constraintStart_toEndOf="@+id/area1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.514" />
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:text="@string/instrucciones_label"
+            />
 
         <TextView
-            android:id="@+id/textView6"
-            android:layout_width="331dp"
-            android:layout_height="36dp"
-            android:text="Instrucciones: arraste las opciones y ordene la referencia según el tipo de referencia que que se indica."
-            app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.225"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.284" />
+            android:id="@+id/resultingReferenceTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="@string/instructions_text"
+            />
 
-        <TextView
-            android:id="@+id/reference_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/reference_title"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.159" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/referenceFieldsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/reference_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tipo_de_referencia"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.061"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.16" />
-
-        <TextView
-            android:id="@+id/exercise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ejercicio_no"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.048"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.101" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

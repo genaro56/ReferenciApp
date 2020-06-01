@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getColor
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
 import com.example.referenciapp.ReferenceMenuViewModel
 import com.example.referenciapp.database.DigitalExercises
+import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.list_selection_view_holder.view.*
 
 class DigitalExerciseListAdapter(
@@ -24,12 +26,14 @@ class DigitalExerciseListAdapter(
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var exercises = emptyList<DigitalExercises>() // cached copy of print exercises
+    private var context = context
     val vm = viewModel
 
     inner class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val exerciseLabel = itemView.exerciseLabel as TextView
         val exerciseTitle = itemView.exerciseTitle as TextView
         val completionBar = itemView.completionBar as ImageView
+        val exerciseCard = itemView.exerciseCard as MaterialCardView
 
         init {
             itemView.setOnClickListener(
@@ -50,8 +54,12 @@ class DigitalExerciseListAdapter(
         val title = "Ejercicio ${position + 1}"
         holder.exerciseLabel.text = title
         holder.exerciseTitle.text = current.description
-        if (current.completed)
-            holder.completionBar.setBackgroundColor(Color.GREEN)
+        if (current.completed) {
+            holder.completionBar.setBackgroundColor(context.resources.getColor(R.color.complete))
+        }
+        else {
+            holder.completionBar.setBackgroundColor(Color.LTGRAY)
+        }
 
         holder.itemView.setOnClickListener { view ->
             vm.setSelectedId(position)

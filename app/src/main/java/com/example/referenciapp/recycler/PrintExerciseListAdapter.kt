@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.referenciapp.R
 import com.example.referenciapp.ReferenceMenuViewModel
 import com.example.referenciapp.database.PrintExercises
+import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.list_selection_view_holder.view.*
 
 class PrintExerciseListAdapter(
@@ -25,12 +26,14 @@ class PrintExerciseListAdapter(
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var exercises = emptyList<PrintExercises>() // cached copy of print exercises
+    private val context = context
     private val vm = viewModel
 
     inner class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val exerciseLabel = itemView.exerciseLabel as TextView
         val exerciseTitle = itemView.exerciseTitle as TextView
         val completionBar = itemView.completionBar as ImageView
+        val exerciseCard = itemView.exerciseCard as MaterialCardView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
@@ -44,7 +47,7 @@ class PrintExerciseListAdapter(
         holder.exerciseLabel.text = title
         holder.exerciseTitle.text = current.description
         if (current.completed) {
-            holder.completionBar.setBackgroundColor(Color.GREEN)
+            holder.completionBar.setBackgroundColor(context.resources.getColor(R.color.complete))
         }
         else
             holder.completionBar.setBackgroundColor(Color.LTGRAY)

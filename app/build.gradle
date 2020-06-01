@@ -77,4 +77,5 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
+    implementation 'com.uncopt:android.justified:1.0'
 }
