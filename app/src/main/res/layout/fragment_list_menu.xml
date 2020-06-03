@@ -36,18 +36,17 @@
             <com.uncopt.android.widget.text.justify.JustifiedTextView
                 android:id="@+id/apaUrl"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="@string/apaUrl"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_weight="1"
                 android:autoLink="web"
-                />
+                android:text="@string/apaUrl"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
             <com.uncopt.android.widget.text.justify.JustifiedTextView
                 android:id="@+id/devsTitle"
                 android:layout_width="351dp"
-                android:layout_height="7dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
                 android:autoLink="web"
@@ -62,6 +61,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="213dp"
                     android:layout_height="45dp"
+                    android:autoLink="web"
                     android:text="@string/devRick"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +90,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="213dp"
                     android:layout_height="45dp"
+                    android:autoLink="web"
                     android:text="@string/devGen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
