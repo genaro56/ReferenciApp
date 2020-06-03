@@ -31,8 +31,8 @@ interface ReferenceDao {
 
     // Updating data (e.g. when an exercise is complete
     @Update
-    suspend fun updatePrint(vararg ex: PrintExercises)
+    suspend fun updatePrint(vararg ex: PrintExercises?)
 
     @Update
-    suspend fun updateDigital(vararg ex: DigitalExercises)
+    suspend fun updateDigital(vararg ex: DigitalExercises?)
 }

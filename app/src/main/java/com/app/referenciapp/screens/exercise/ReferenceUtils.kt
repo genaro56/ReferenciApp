@@ -21,10 +21,10 @@ object ReferenceUtils {
         return list
     }
 
-    fun extractDigitalFields(currentExercise: DigitalExercises): List<String> {
+    fun extractDigitalFields(currentExercise: DigitalExercises?): List<String> {
         var fields = emptyList<String>()
 
-        when (currentExercise.resourceType) {
+        when (currentExercise?.resourceType) {
             1 -> {
                 fields = listOf<String>(
                     currentExercise.authors,
@@ -120,10 +120,10 @@ object ReferenceUtils {
         return fields.filter { x -> x != "" }
     }
 
-    fun extractPrintFields(currentExercise: PrintExercises): List<String> {
+    fun extractPrintFields(currentExercise: PrintExercises?): List<String> {
         var fields = emptyList<String>()
 
-        when (currentExercise.resourceType) {
+        when (currentExercise?.resourceType) {
             1 -> {
                 fields = listOf<String>(
                     currentExercise.authors,

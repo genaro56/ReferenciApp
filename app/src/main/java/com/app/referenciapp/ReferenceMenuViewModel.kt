@@ -88,11 +88,11 @@ class ReferenceMenuViewModel(application: Application): AndroidViewModel(applica
         repository.insertDigital(ex)
     }
 
-    fun updatePrint(ex: PrintExercises) = viewModelScope.launch(Dispatchers.IO) {
+    fun updatePrint(ex: PrintExercises?) = viewModelScope.launch(Dispatchers.IO) {
         repository.updatePrint(ex)
     }
 
-    fun updateDigital(ex: DigitalExercises) = viewModelScope.launch(Dispatchers.IO) {
+    fun updateDigital(ex: DigitalExercises?) = viewModelScope.launch(Dispatchers.IO) {
         repository.updateDigital(ex)
     }
 }

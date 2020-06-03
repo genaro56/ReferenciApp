@@ -15,11 +15,11 @@ class ReferenceRepository(private val referenceDao: ReferenceDao) {
         referenceDao.insertDigitalAll(*ex)
     }
 
-    suspend fun updatePrint(ex: PrintExercises) {
+    suspend fun updatePrint(ex: PrintExercises?) {
         referenceDao.updatePrint(ex)
     }
 
-    suspend fun updateDigital(ex: DigitalExercises) {
+    suspend fun updateDigital(ex: DigitalExercises?) {
         referenceDao.updateDigital(ex)
     }
 }
