@@ -47,7 +47,7 @@ class ExerciseFragment : Fragment() {
                 val fromPosition = viewHolder.adapterPosition
                 val toPosition = target.adapterPosition
 
-                Collections.swap(exerciseViewModel.attributes.value!!, fromPosition, toPosition)
+                Collections.swap(exerciseViewModel.attributes.value, fromPosition, toPosition)
                 adapter.notifyItemMoved(fromPosition, toPosition)
 
                 return false
@@ -61,7 +61,7 @@ class ExerciseFragment : Fragment() {
 
                 // Update the view model
                 exerciseViewModel.setAttrs(
-                    exerciseViewModel.attributes.value!!
+                    exerciseViewModel.attributes.value
                 )
 
                 viewHolder.itemView.alpha = 1.0f
@@ -106,13 +106,13 @@ class ExerciseFragment : Fragment() {
         dragAndDrop.attachToRecyclerView(recyclerView)
 
         // Unpack the current exercise
-        val currentExercise: Any
+        val currentExercise: Any?
         val correctAnswer: List<String>
         var attrs: List<String>
         if(appViewModel.resourceType.value == 0) {
             // It is a print exercise
-            currentExercise = appViewModel.currentPrintExercise.value!!
-            titleBarSetup(supportActionBar, currentExercise.id, currentExercise.description)
+            currentExercise = appViewModel.currentPrintExercise.value
+            titleBarSetup(supportActionBar, currentExercise?.id, currentExercise?.description)
             correctAnswer = ReferenceUtils.extractPrintFields(currentExercise)
             attrs = correctAnswer
 
@@ -126,8 +126,8 @@ class ExerciseFragment : Fragment() {
         }
         else {
             // It is a digital exercise
-            currentExercise = appViewModel.currentDigitalExercise.value!!
-            titleBarSetup(supportActionBar, currentExercise.id, currentExercise.description)
+            currentExercise = appViewModel.currentDigitalExercise.value
+            titleBarSetup(supportActionBar, currentExercise?.id, currentExercise?.description)
             correctAnswer = ReferenceUtils.extractDigitalFields(currentExercise)
             attrs = correctAnswer
 
@@ -150,8 +150,9 @@ class ExerciseFragment : Fragment() {
         return binding.root
     }
 
-    private fun titleBarSetup(supportActionBar: ActionBar?, id: Long, description: String) {
-        supportActionBar?.title = "Ejercicio ${id + 1}"
+    private fun titleBarSetup(supportActionBar: ActionBar?, id: Long?, description: String?) {
+        val result = id?.plus(1)
+        supportActionBar?.title = "Ejercicio $result"
         supportActionBar?.subtitle = description
     }
 
@@ -159,13 +160,13 @@ class ExerciseFragment : Fragment() {
         if(correctAnswer == attributes) {
             // Update the db
             if(appViewModel.resourceType.value == 0) {
-                val newPrintEx: PrintExercises = appViewModel.currentPrintExercise.value!!
-                newPrintEx.completed = true
+                val newPrintEx: PrintExercises? = appViewModel.currentPrintExercise.value
+                newPrintEx?.completed = true
                 appViewModel.updatePrint(newPrintEx)
             }
             else if (appViewModel.resourceType.value == 1){
-                val newDigiEx: DigitalExercises = appViewModel.currentDigitalExercise.value!!
-                newDigiEx.completed = true
+                val newDigiEx: DigitalExercises? = appViewModel.currentDigitalExercise.value
+                newDigiEx?.completed = true
                 appViewModel.updateDigital(newDigiEx)
             }
 

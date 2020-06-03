@@ -37,8 +37,8 @@ class ReferenceMenuFragment : Fragment() {
 
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
-        tabLayout.getTabAt(0)!!.setIcon(R.drawable.ic_description_black_24dp)
-        tabLayout.getTabAt(1)!!.setIcon(R.drawable.ic_desktop_mac_black_24dp)
+        tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_description_black_24dp)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_desktop_mac_black_24dp)
 
         val supportActionBar = (activity as AppCompatActivity).supportActionBar
         supportActionBar?.title = "Lista de ejercicios"

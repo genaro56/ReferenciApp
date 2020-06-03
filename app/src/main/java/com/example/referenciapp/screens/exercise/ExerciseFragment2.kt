@@ -56,13 +56,13 @@ class ExerciseFragment2 : Fragment() {
             ViewModelProvider(requireNotNull(activity)).get(ExerciseViewModel::class.java)
 
         // Unpack the current exercise
-        val currentExercise: Any
+        val currentExercise: Any?
         val correctAnswer: List<String>
         val attrs: List<String>
         if(appViewModel.resourceType.value == 0) {
             // It is a print exercise
-            currentExercise = appViewModel.currentPrintExercise.value!!
-            titleBarSetup(supportActionBar, currentExercise.id, currentExercise.description)
+            currentExercise = appViewModel.currentPrintExercise.value
+            titleBarSetup(supportActionBar, currentExercise?.id, currentExercise?.description)
             correctAnswer = ReferenceUtils.extractPrintFields(currentExercise)
             attrs =
                 if ((0..10).random().rem(2) == 0)
@@ -75,8 +75,8 @@ class ExerciseFragment2 : Fragment() {
         }
         else {
             // It is a digital exercise
-            currentExercise = appViewModel.currentDigitalExercise.value!!
-            titleBarSetup(supportActionBar, currentExercise.id, currentExercise.description)
+            currentExercise = appViewModel.currentDigitalExercise.value
+            titleBarSetup(supportActionBar, currentExercise?.id, currentExercise?.description)
             correctAnswer = ReferenceUtils.extractDigitalFields(currentExercise)
             attrs =
                 if ((0..10).random().rem(2) == 0)
@@ -157,7 +157,7 @@ class ExerciseFragment2 : Fragment() {
             .setTitle("¡Excelente!")
             .setMessage(msg)
             .setNeutralButton("Atrás") { _, _ ->
-                requireView().findNavController().popBackStack()
+                view?.findNavController()?.popBackStack()
             }
             .show()
 
@@ -170,7 +170,7 @@ class ExerciseFragment2 : Fragment() {
             .setTitle("Respuesta incorrecta")
             .setMessage(msg)
             .setNegativeButton("Atrás") { _, _ ->
-                requireView().findNavController().popBackStack()
+                view?.findNavController()?.popBackStack()
             }
             .setPositiveButton("Reintentar") { _, _ ->
                 parentFragmentManager
@@ -181,20 +181,20 @@ class ExerciseFragment2 : Fragment() {
             .show()
     }
 
-    private fun titleBarSetup(supportActionBar: ActionBar?, id: Long, description: String) {
-        supportActionBar?.title = "Ejercicio ${id + 1}"
+    private fun titleBarSetup(supportActionBar: ActionBar?, id: Long?, description: String?) {
+        supportActionBar?.title = "Ejercicio ${id?.plus(1)}"
         supportActionBar?.subtitle = description
     }
 
     private fun updateDB() {
         if(appViewModel.resourceType.value == 0) {
-            val updatedExercise: PrintExercises = appViewModel.currentPrintExercise.value!!
-            updatedExercise.completed = true
+            val updatedExercise: PrintExercises? = appViewModel.currentPrintExercise.value
+            updatedExercise?.completed = true
             appViewModel.updatePrint(updatedExercise)
         }
         else if (appViewModel.resourceType.value == 1){
-            val updatedExercise: DigitalExercises = appViewModel.currentDigitalExercise.value!!
-            updatedExercise.completed = true
+            val updatedExercise: DigitalExercises? = appViewModel.currentDigitalExercise.value
+            updatedExercise?.completed = true
             appViewModel.updateDigital(updatedExercise)
         }
     }
